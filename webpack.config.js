@@ -28,11 +28,12 @@ module.exports = {
                 test: /\.css$/i, use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(svg|png|ico|jpg|jpeg|webp|gif|)$/i, type: "asset/resource",
+                test: /\.(svg|png|ico|jpg|jpeg|webp|gif|)$/i,
+                type: "asset/resource",
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
+                type: "asset/resource",
             },
         ]
     },
