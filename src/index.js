@@ -1,7 +1,8 @@
 import style from "./style.css";
 import appLogo from "./appLogo.js";
-import * as Shedule from "./displayController";
-import * as Html from "./htmlGenerator";
+import * as Shedule from "./itemsToDisplay.js";
+import * as Html from "./htmlGenerator.js";
+
 
 const TODAY_TASKS_TITLE = 'Today tasks';
 const IMPORTANT_TASKS_TITLE = 'Important tasks';
@@ -54,7 +55,10 @@ Html.useTextAsInnerHtmlOfNode(NEWT_WEEK_TASKS_TITLE, nextWeekTasksHeaderTitleCon
 // dashboard Project part 
 
 
-const ProjectsContainer = document.querySelector('.projectsContainer');
+const projectsContainer = document.querySelector('.projectsContainer');
+Html.appendHtmlChildNodeToParentNode(Shedule.newProjectPopup, projectsContainer);
+
+
 
 const newProjectLineItems = [Shedule.newProjectLeftIconContainer,
 Shedule.newProjectLineTitleContainer,
@@ -67,7 +71,74 @@ newProjectLineItems.forEach((item) => {
 })
 
 Html.useTextAsInnerHtmlOfNode(NEW_PROJECT_LINE_TITLE, Shedule.newProjectLineTitleContainer);
-Html.appendHtmlChildNodeToParentNode(Shedule.newProjectLine, ProjectsContainer);
+Html.appendHtmlChildNodeToParentNode(Shedule.newProjectLine, projectsContainer);
+
+
+
+
+//  application body 
+
+const tasksContainer = document.querySelector('.tasksContainer');
+const NEW_TASK_LINE_TITLE = 'Click to add a task to do '
+
+const newTaskLineItems = [
+    Shedule.newTaskLineIcon, Shedule.newTaskLineTitleContainer
+];
+
+newTaskLineItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, Shedule.newTaskLine);
+})
+Html.appendHtmlChildNodeToParentNode(Shedule.newTaskLine, tasksContainer);
+Html.useTextAsInnerHtmlOfNode(NEW_TASK_LINE_TITLE, Shedule.newTaskLineTitleContainer);
+
+
+// Handling Events
+
+// nodes to look 
+const newProjectPopupNode = document.querySelector('.new-project-popup');
+const newProjectLine = document.querySelector('.new-project-line');
+const newProjectAddButton = document.querySelector('.new-project.add-button');
+const newProjectCancelButton = document.querySelector('.new-project.cancel-button');
+const newProjectTitleCollecter = document.querySelector('.new-project-title-collecter');
+
+// useful functions 
+
+function replaceNewProjectLIneByNewProjectPopup() {
+    removeNewProjectLine();
+    displayNewProjectPopup();
+}
+
+function replaceNewProjectPopupWithNewProjectLine() {
+    removeNewProjectPopup();
+    displayNewProjectLine();
+}
+
+
+function removeNewProjectPopup() {
+    Html.removeFlexNode(newProjectPopupNode);
+}
+
+function displayNewProjectPopup() {
+    Html.displayFlexNode(newProjectPopupNode);
+}
+
+function displayNewProjectLine() {
+    Html.displayFlexNode(newProjectLine);
+}
+
+function removeNewProjectLine() {
+    Html.removeFlexNode(newProjectLine);
+}
+
+
+
+
+// Event listeners
+newProjectLine.addEventListener('click', replaceNewProjectLIneByNewProjectPopup);
+newProjectCancelButton.addEventListener('click', () => {
+    replaceNewProjectPopupWithNewProjectLine();
+    Html.cleanInputValueOfNode(newProjectTitleCollecter);
+});
 
 
 

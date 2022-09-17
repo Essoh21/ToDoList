@@ -41,10 +41,40 @@ function appendHtmlChildNodeToParentNode(childNode, parentNode) {
 }
 
 
+function createNewTextInputWithClassName(className) {
+    const newInput = createNewTextInput();
+    addClassNameToNode(className, newInput);
+    return newInput;
+}
+
+function createNewTextInput() {
+    const newInput = document.createElement('input');
+    return newInput;
+}
+
+function displayFlexNode(flexNode) {
+    flexNode.style.display = 'flex';
+}
+function removeFlexNode(flexNode) {
+    flexNode.style.display = 'none';
+}
+
+
+function cleanNodeInnerHtml(nodeToClean) {
+    nodeToClean.innerHTML = '';
+}
+
+function cleanInputValueOfNode(inputNode) {
+    inputNode.value = '';
+}
+
+
 export {
     createNewDivWithClassName, createNewImgTagWithClassName,
+    createNewTextInputWithClassName,
     addSrcToImgNode, addAltToImgNode, useTextAsInnerHtmlOfNode,
-    appendHtmlChildNodeToParentNode
+    appendHtmlChildNodeToParentNode, displayFlexNode, removeFlexNode, cleanNodeInnerHtml,
+    cleanInputValueOfNode
 }
 
 

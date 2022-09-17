@@ -64,7 +64,7 @@ body {
 
     display: flex;
     flex-direction: row;
-    /*justify-content: space-between;  */
+
 
 }
 
@@ -81,6 +81,7 @@ body {
 .profileAndScheduleContainer {
     padding-left: var(--left-side-padding);
     min-height: 40%;
+    width: 92%;
 }
 
 .profileContainer {
@@ -115,7 +116,7 @@ body {
 
 .scheduleContainer {
     margin-top: 1rem;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -155,26 +156,95 @@ body {
 
 
 .projectsContainer {
+    min-height: 52%;
     padding-left: var(--left-side-padding);
     font-family: var(--left-side-font);
     display: flex;
     flex-direction: column;
     color: var(--left-litle-titles-color);
     font-weight: var(--titles-font-weight);
+}
+
+
+
+.new-project-popup {
+    display: none;
+    padding: var(--left-side-padding);
+    width: 80%;
+    margin-top: .5rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.new-project-title-collecter {
+    width: 97%;
+    background-color: var(--profilename-underline-color);
+    border: none;
+    padding: .3rem;
+    height: 1.5rem;
+    color: var(--header-background-color);
 
 }
 
+
+.new-project-popup-buttons {
+    padding: 0;
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(.5rem, 15%, 10rem);
+
+}
+
+
+.add-button,
+.cancel-button {
+    font-size: clamp(.5rem, .75rem, 1.2rem);
+    width: clamp(2.5rem, 40%, 4rem);
+    height: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .3rem .7rem;
+    border-radius: .2rem;
+    cursor: pointer;
+
+}
+
+.add-button {
+    background-color: green;
+    justify-self: flex-start;
+}
+
+.cancel-button {
+    background-color: red;
+    justify-self: flex-end;
+
+}
+
+
 .new-project-line {
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
     justify-content: space-between;
     cursor: pointer;
     margin-top: 1rem;
     padding: var(--left-side-padding);
+}
 
+.new-project-line:hover {
+    background-color: var(--header-background-color);
+    border-radius: .5rem;
+}
 
-
+.new-project-line:active {
+    opacity: .5;
 }
 
 .tasksContainer {
@@ -182,11 +252,30 @@ body {
     width: 100%;
     background-image: url('./images/back.jpg');
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-task-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    background-color: var(--profilename-underline-color);
+    border-radius: 1rem;
+    font-family: var(--tasks-container-font);
+    font-weight: var(--titles-font-weight);
+    color: var(--left-container-backgroud);
+    padding: .3rem;
+    gap: 40%;
+    margin-top: 1rem;
+    cursor: pointer;
 }
 
 
-
 .footer {
+    justify-self: flex-end;
     height: 2rem;
     width: 100vw;
     background-color: var(--header-background-color);
