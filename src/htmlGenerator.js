@@ -1,4 +1,14 @@
 
+
+function createNewFormWithClassName(className) {
+    const newForm = createNewForm();
+    addClassNameToNode(className, newForm);
+}
+function createNewForm() {
+    const newForm = document.createElement('form');
+    return newForm;
+}
+
 function createNewDivWithClassName(className) {
     const newDiv = createNewDiv();
     addClassNameToNode(className, newDiv);
@@ -71,7 +81,7 @@ function cleanInputValueOfNode(inputNode) {
 
 export {
     createNewDivWithClassName, createNewImgTagWithClassName,
-    createNewTextInputWithClassName,
+    createNewTextInputWithClassName, createNewFormWithClassName,
     addSrcToImgNode, addAltToImgNode, useTextAsInnerHtmlOfNode,
     appendHtmlChildNodeToParentNode, displayFlexNode, removeFlexNode, cleanNodeInnerHtml,
     cleanInputValueOfNode

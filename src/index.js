@@ -2,6 +2,7 @@ import style from "./style.css";
 import appLogo from "./appLogo.js";
 import * as Shedule from "./itemsToDisplay.js";
 import * as Html from "./htmlGenerator.js";
+import Icons from "./icons";
 
 
 const TODAY_TASKS_TITLE = 'Today tasks';
@@ -58,8 +59,12 @@ Html.useTextAsInnerHtmlOfNode(NEWT_WEEK_TASKS_TITLE, nextWeekTasksHeaderTitleCon
 const projectsContainer = document.querySelector('.projectsContainer');
 Html.appendHtmlChildNodeToParentNode(Shedule.newProjectPopup, projectsContainer);
 
+// all projects collecter 
+
+const allProjects = [];
 
 
+// The line to click to  display popup to add a new project Title
 const newProjectLineItems = [Shedule.newProjectLeftIconContainer,
 Shedule.newProjectLineTitleContainer,
 Shedule.newProjectLineRightIconContainer
@@ -91,6 +96,8 @@ newTaskLineItems.forEach((item) => {
 Html.appendHtmlChildNodeToParentNode(Shedule.newTaskLine, tasksContainer);
 Html.useTextAsInnerHtmlOfNode(NEW_TASK_LINE_TITLE, Shedule.newTaskLineTitleContainer);
 
+Html.appendHtmlChildNodeToParentNode(Shedule.tasksTable, tasksContainer);
+
 
 // Handling Events
 
@@ -100,6 +107,10 @@ const newProjectLine = document.querySelector('.new-project-line');
 const newProjectAddButton = document.querySelector('.new-project.add-button');
 const newProjectCancelButton = document.querySelector('.new-project.cancel-button');
 const newProjectTitleCollecter = document.querySelector('.new-project-title-collecter');
+
+// variable that collect newProject Title 
+
+let newProjectTitle = '';
 
 // useful functions 
 
@@ -130,15 +141,47 @@ function removeNewProjectLine() {
     Html.removeFlexNode(newProjectLine);
 }
 
+// new projects handlers
 
+function dispalayAllProjects() {
+    allProjects.slice().reverse().forEach((project) => {
+        Html.appendHtmlChildNodeToParentNode(project, projectsContainer);
+    })
+}
 
+function createNewProjectWithTitle(projectTitle) {
+    const newProject = new Shedule.Project();
+    newProject.projectName = projectTitle;
+
+    return newProject.createNewProjectHtml();
+
+}
+
+function getNewProjectTitle() {
+    newProjectTitle = newProjectTitleCollecter.value;
+}
 
 // Event listeners
+
 newProjectLine.addEventListener('click', replaceNewProjectLIneByNewProjectPopup);
+
 newProjectCancelButton.addEventListener('click', () => {
     replaceNewProjectPopupWithNewProjectLine();
     Html.cleanInputValueOfNode(newProjectTitleCollecter);
 });
+newProjectAddButton.addEventListener('click', () => {
+    getNewProjectTitle();
+    if (!(newProjectTitle == '')) {
+        allProjects.push(createNewProjectWithTitle(newProjectTitle))
+    }
+    removeNewProjectLine();
+    removeNewProjectPopup();
+    dispalayAllProjects();
+    Html.cleanInputValueOfNode(newProjectTitleCollecter);
+    displayNewProjectLine();
+
+
+})
 
 
 

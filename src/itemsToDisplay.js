@@ -97,7 +97,7 @@ newProjectPopupItems.forEach((item) => {
 })
 
 
-
+//   the line to click in order to load newProject popup
 const NEW_PROJECT_LINE_CLASSNAME = 'new-project-line';
 const NEW_PROJECT_LINE_LEFT_ICON_CLASSNAME = 'project-line-left-icon';
 const NEW_PROJECT_LINE_RIGHT_ICON_CLASSNAME = 'project-line-right-icon';
@@ -123,27 +123,55 @@ class Project {
     constructor(projectName, projectIconContainerClassName = 'new-project-icon',
         projectNameContainerClassName = 'new-project-name-container',
         projectReducedIconContainerClassName = 'new-project-reduced-icon',
-        newProjectContainerClassName = 'new-project-container') {
+        newProjectContainerClassName = 'new-project-container',
+        newProjectLogoSrc = Icons.projectIcon,
+        projectReducedIconSrc = Icons.chevronRightIcon,
+        newProjectLogoAlt = 'project icon',
+        projectReducedIconAlt = 'chevron right'
+    ) {
         this.projectName = projectName;
         this.projectIconContainerClasseName = projectIconContainerClassName;
         this.projectNameContainerClassName = projectNameContainerClassName;
         this.projectReducedIconContainerClassName = projectReducedIconContainerClassName;
         this.newProjectContainerClassName = newProjectContainerClassName
+        this.newProjectLogoSrc = newProjectLogoSrc;
+        this.projectReducedIconSrc = projectReducedIconSrc;
+        this.newProjectLogoAlt = newProjectLogoAlt;
+        this.projectReducedIconAlt = projectReducedIconAlt;
+    }
+
+    createProjectLogoHtml() {
+        const projectLogo = Html.createNewImgTagWithClassName(this.projectIconContainerClasseName);
+        Html.addSrcToImgNode(this.newProjectLogoSrc, projectLogo);
+        Html.addAltToImgNode(this.newProjectLogoAlt, projectLogo);
+        return projectLogo;
+    }
+
+    createProjectReducedIconHtml() {
+        const projectReducedIcon = Html.createNewImgTagWithClassName(this.projectReducedIconContainerClassName);
+        Html.addSrcToImgNode(this.projectReducedIconSrc, projectReducedIcon);
+        Html.addAltToImgNode(this.projectReducedIconAlt, projectReducedIcon);
+
+        return projectReducedIcon;
     }
     createNewProjectHtml() {
-        const projectContainer = Html.createNewDivWithClassName(this.newProjectContainerClassName);
-        const projectIconContainer = Html.createNewImgTagWithClassName(this.projectIconContainerClasseName);
+        const projectContainer = Html.createNewDivWithClassName(this.newProjectContainerClassName).cloneNode(true);
+        const projectIcon = this.createProjectLogoHtml();
         const projectNameContainer = Html.createNewDivWithClassName(this.projectNameContainerClassName);
+        Html.useTextAsInnerHtmlOfNode(this.projectName, projectNameContainer);
+        const projectReducedIconContainer = this.createProjectReducedIconHtml().cloneNode(true);
+        const projectContainerItems = [projectIcon, projectNameContainer, projectReducedIconContainer];
 
-    }
-    createProjectContainerWithClassName(classeName = 'new-project-Container') {
-        const projectContainer = Html.createNewDivWithClassName(classeName);
+        projectContainerItems.forEach((item) => {
+            Html.appendHtmlChildNodeToParentNode(item, projectContainer);
+        })
+
+
         return projectContainer;
     }
-    createIconContainerWithClassName(classeName = 'new-project-icon-container') {
-        const iconContainer = Html.createNewImgTagWithClassName(classeName)
-        return iconContainer;
-    }
+
+
+
 
 
 
@@ -151,16 +179,56 @@ class Project {
 
 // right Container 
 
+
+// new Task popup
+
+const TASK_POPUP_CLASSNAME = 'task-popup-form';
+const TASK_POPUP_CONTAINER_CLASSNAME = 'task-popup-container';
+const TASK_POPUP_HEADER_CLASSNAME = 'task-popup-header';
+const TASK_POPUP_BODY_CLASSNAME = 'task-popup-body';
+const TASK_POPUP_BODY_LEFT_CLASSNAME = 'task-popup-body-left';
+const TASK_POPUP_BODY_RIGHT_CLASSNAME = 'task-popup-body-right';
+const TASK_POPUP_BODY_RIGHT_UP_CLASSNAME = 'task-popup-body-right-up';
+const TASK_POPUP_BODY_RIGHT_LOW_CLASSNAME = 'task-popup-body-right-low';
+const TASK_DUE_DATE_INPUT_ID = 'due-date';
+const ADD_TASK_BUTTON_CLASSNAME = 'add-task';
+
+
+
+
+const popupForm = Html.createNewFormWithClassName(TASK_POPUP_CLASSNAME);
+
+
+const taskPopupContainer = Html.createNewDivWithClassName(TASK_POPUP_CONTAINER_CLASSNAME);
+
+const taskPopupHeader = Html.createNewDivWithClassName(TASK_POPUP_HEADER_CLASSNAME);
+
+const taskPopupBody = Html.createNewDivWithClassName(TASK_POPUP_BODY_CLASSNAME);
+const taskPopupBodyLeft = Html.createNewDivWithClassName(TASK_POPUP_BODY_LEFT_CLASSNAME);
+const taskPopupBodyRight = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_CLASSNAME);
+const taskPopupBodyRightUp = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_UP_CLASSNAME);
+const taskPopupBodyRightLow = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_LOW_CLASSNAME);
+
+
+
+
+
+
+
+// The line to click in order to load newtask popup
 const NEW_TASK_LINE_CLASSNAME = 'new-task-line';
 const NEW_TASK_LINE_ICON_CLASSNAME = 'new-task-line-icon';
 const NEW_TASK_LINE_ICON_ALT = 'plus icon';
 const NEW_TASK_LINE_TITLE_CLASSNAME = 'new-task-line-title';
+const TASKS_TABLE_CLASSNAME = 'tasks-table';
 
 const newTaskLine = Html.createNewDivWithClassName(NEW_TASK_LINE_CLASSNAME);
 const newTaskLineTitleContainer = Html.createNewDivWithClassName(NEW_TASK_LINE_TITLE_CLASSNAME);
 const newTaskLineIcon = Html.createNewImgTagWithClassName(NEW_TASK_LINE_ICON_CLASSNAME);
 Html.addSrcToImgNode(Icons.addPlusIcon, newTaskLineIcon);
 Html.addAltToImgNode(NEW_TASK_LINE_ICON_ALT, newTaskLine);
+
+const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
 
 
 
@@ -169,7 +237,8 @@ export {
     sheduleContainersNodes, sheduleHeaderTitlesNodes, sheduleLogosNodes,
     sheduleReducedIconNode, newProjectLine, newProjectLeftIconContainer,
     newProjectLineRightIconContainer, newProjectLineTitleContainer,
-    newTaskLine, newTaskLineIcon, newTaskLineTitleContainer, newProjectPopup
+    newTaskLine, newTaskLineIcon, newTaskLineTitleContainer, newProjectPopup,
+    Project, tasksTable
 };
 
 
