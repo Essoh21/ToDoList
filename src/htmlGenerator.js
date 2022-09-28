@@ -136,6 +136,18 @@ function removeFlexNode(flexNode) {
     flexNode.style.display = 'none';
 }
 
+function displayNodeAsBlock(blockNode) {
+    blockNode.style.display = 'block';
+}
+
+function displayNodeAsGrid(node) {
+    node.style.display = 'grid';
+}
+
+function removeNode(node) {
+    node.style.display = 'none';
+}
+
 
 function cleanNodeInnerHtml(nodeToClean) {
     nodeToClean.innerHTML = '';
@@ -151,7 +163,8 @@ export {
     createNewTextInputWithClassName, createNewFormWithClassName, createNewLabelFor,
     addSrcToImgNode, addAltToImgNode, useTextAsInnerHtmlOfNode, createNewTextAreaWithId,
     appendHtmlChildNodeToParentNode, displayFlexNode, removeFlexNode, cleanNodeInnerHtml,
-    cleanInputValueOfNode, createDateInputWithId, createNewCheckboxInputWithid
+    cleanInputValueOfNode, createDateInputWithId, createNewCheckboxInputWithid, displayNodeAsBlock, removeNode,
+    displayNodeAsGrid
 }
 
 

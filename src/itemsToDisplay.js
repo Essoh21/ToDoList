@@ -206,7 +206,10 @@ const TASK_TITLE = 'Task Title';
 const TASK_DESCRIPTION_LABEL_TEXT = 'Task Description';
 const ADD_TASK_TEXT = 'ADD';
 const CHEBOX_LABEL_TEXT = 'Is it important? Check.';
-
+const CLOSE_ICON_CLASSNAME = 'close-icon';
+const CLOSE_TASKPOPUP_ICON_ALT = 'close icon';
+const CLOSE_TASKPOPUP_ICON_SRC = Icons.closeIcon;
+const CLOSE_ICON_TITLE = 'Click to cancel';
 
 
 
@@ -218,6 +221,11 @@ const CHEBOX_LABEL_TEXT = 'Is it important? Check.';
 const taskPopupContainer = Html.createNewDivWithClassName(TASK_POPUP_CONTAINER_CLASSNAME);
 
 const taskPopupHeader = Html.createNewDivWithClassName(TASK_POPUP_HEADER_CLASSNAME);
+const closeTaskPopupIcon = Html.createNewImgTagWithClassName(CLOSE_ICON_CLASSNAME);
+Html.addSrcToImgNode(CLOSE_TASKPOPUP_ICON_SRC, closeTaskPopupIcon);
+Html.addAltToImgNode(CLOSE_TASKPOPUP_ICON_ALT, closeTaskPopupIcon);
+closeTaskPopupIcon.title = `${CLOSE_ICON_TITLE}`;
+Html.appendHtmlChildNodeToParentNode(closeTaskPopupIcon, taskPopupHeader);
 
 
 const taskPopupBody = Html.createNewDivWithClassName(TASK_POPUP_BODY_CLASSNAME);

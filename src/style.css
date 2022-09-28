@@ -310,22 +310,32 @@ body {
 }
 
 .task-popup-container {
+
     width: 70%;
     height: 40vh;
 
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr 8fr;
     grid-template-areas: "popupHeader popupHeader"
         " popupBody popupBody";
+
+    margin-top: 3rem;
 }
 
 .task-popup-header {
     height: 40px;
     grid-area: popupHeader;
     background-color: var(--header-background-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 
+}
 
+.close-icon {
+    cursor: pointer;
 }
 
 .task-popup-body {

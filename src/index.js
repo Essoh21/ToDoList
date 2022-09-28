@@ -163,7 +163,7 @@ function getNewProjectTitle() {
 }
 
 // Event listeners
-
+// new project Events 
 newProjectLine.addEventListener('click', replaceNewProjectLIneByNewProjectPopup);
 
 newProjectCancelButton.addEventListener('click', () => {
@@ -185,6 +185,53 @@ newProjectAddButton.addEventListener('click', () => {
 })
 
 
+// new task Popup  Events
+
+
+//usefull functions 
+
+function removeNewTaskLine() {
+    Html.removeFlexNode(newTaskLine);
+}
+
+function displayNewTaskLine() {
+    Html.displayFlexNode(newTaskLine);
+}
+
+function removeNewTaskPopup() {
+    Html.removeNode(newTaskPopup);
+}
+
+function displayNewTaskPopup() {
+    Html.displayNodeAsGrid(newTaskPopup);
+}
+
+//Nodes to look 
+
+const newTaskLine = document.querySelector('.new-task-line');
+const newTaskAddButton = document.querySelector('.new-task-add-button');
+const closeIcon = document.querySelector('.close-icon');
+const taskAddButton = document.querySelector('.add-task');
+const newTaskPopup = document.querySelector('.task-popup-container');
+
+
+// new task Popup EventListeners
+
+
+newTaskLine.addEventListener('click', () => {
+    removeNewTaskLine();
+    displayNewTaskPopup();
+})
+
+taskAddButton.addEventListener('click', () => {
+    removeNewTaskPopup();
+    displayNewTaskLine();
+})
+
+closeIcon.addEventListener('click', () => {
+    removeNewTaskPopup();
+    displayNewTaskLine();
+})
 
 
 
