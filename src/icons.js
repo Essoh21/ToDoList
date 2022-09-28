@@ -12,10 +12,11 @@ const trashIcon = require('./icons/trash-2.svg');
 const logoIcon = require('./icons/logo.svg');
 const chevronRightIcon = require('./icons/chevron-right.svg');
 const chevronDownIcon = require('./icons/chevron-down.svg');
+const closeIcon = require('./icons/close.svg');
 
 const Icons = {
     alertCercle, projectIcon, nextIcon, checkIcon, taskIcon,
     editIcon, addFolderIcon, addCircleIcon, addPlusIcon,
-    todayTasksIcon, trashIcon, logoIcon, chevronDownIcon, chevronRightIcon
+    todayTasksIcon, trashIcon, logoIcon, chevronDownIcon, chevronRightIcon, closeIcon
 }
 export default Icons;

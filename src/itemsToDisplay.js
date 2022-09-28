@@ -182,7 +182,6 @@ class Project {
 
 // new Task popup
 
-const TASK_POPUP_CLASSNAME = 'task-popup-form';
 const TASK_POPUP_CONTAINER_CLASSNAME = 'task-popup-container';
 const TASK_POPUP_HEADER_CLASSNAME = 'task-popup-header';
 const TASK_POPUP_BODY_CLASSNAME = 'task-popup-body';
@@ -190,24 +189,122 @@ const TASK_POPUP_BODY_LEFT_CLASSNAME = 'task-popup-body-left';
 const TASK_POPUP_BODY_RIGHT_CLASSNAME = 'task-popup-body-right';
 const TASK_POPUP_BODY_RIGHT_UP_CLASSNAME = 'task-popup-body-right-up';
 const TASK_POPUP_BODY_RIGHT_LOW_CLASSNAME = 'task-popup-body-right-low';
-const TASK_DUE_DATE_INPUT_ID = 'due-date';
 const ADD_TASK_BUTTON_CLASSNAME = 'add-task';
+const TASK_TITLE_COLLECTER_ID = 'task-title-collecter';
+const TEXT_AREA_ID = 'task-description-collecter';
+const TASK_DESCRIPTION_VALUE_HOLDER = 'task-description';
+const TEXT_AREA_NUMBER_OF_LINES = 4;
+const TEXT_AREA_NUMBER_OF_WORDS_PER_LINE = 50;
+const DUE_DATE_COLLECTER_ID = 'due-date';
+const CHECKBOX_ID = 'importance-check';
+const TASK_TITLE_COLLECTER_CONTAINER_CLASSNAME = 'task-title-collecter-container';
+const DESCRIPTION_COLLECTER_CONTAINER_CLASSNAME = 'description-collecter-container';
+const DUE_DATE_CONTAINER_CLASSNAME = 'due-date-container';
+const IMPORTANCE_CHECKBOX_CONTAINER_CALSSNAME = 'importance-checkbox-container';
+const DUE_DATE_LABEL_TEXT = 'Due Date';
+const TASK_TITLE = 'Task Title';
+const TASK_DESCRIPTION_LABEL_TEXT = 'Task Description';
+const ADD_TASK_TEXT = 'ADD';
+const CHEBOX_LABEL_TEXT = 'Is it important? Check.';
 
 
 
 
-const popupForm = Html.createNewFormWithClassName(TASK_POPUP_CLASSNAME);
+
+
+
 
 
 const taskPopupContainer = Html.createNewDivWithClassName(TASK_POPUP_CONTAINER_CLASSNAME);
 
 const taskPopupHeader = Html.createNewDivWithClassName(TASK_POPUP_HEADER_CLASSNAME);
 
+
 const taskPopupBody = Html.createNewDivWithClassName(TASK_POPUP_BODY_CLASSNAME);
 const taskPopupBodyLeft = Html.createNewDivWithClassName(TASK_POPUP_BODY_LEFT_CLASSNAME);
+
 const taskPopupBodyRight = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_CLASSNAME);
+
 const taskPopupBodyRightUp = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_UP_CLASSNAME);
+const taskTitleCollecterContainer = Html.createNewDivWithClassName(TASK_TITLE_COLLECTER_CONTAINER_CLASSNAME);
+const descriptionCollecterContainer = Html.createNewDivWithClassName(DESCRIPTION_COLLECTER_CONTAINER_CLASSNAME);
+const taskTitleCollecterLabel = Html.createNewLabelFor(TASK_TITLE_COLLECTER_ID);
+Html.useTextAsInnerHtmlOfNode(TASK_TITLE, taskTitleCollecterLabel);
+const taskTitleCollecter = Html.createNewTextInputWithId(TASK_TITLE_COLLECTER_ID);
+const descriptionCollecterLabel = Html.createNewLabelFor(TEXT_AREA_ID);
+Html.useTextAsInnerHtmlOfNode(TASK_DESCRIPTION_LABEL_TEXT, descriptionCollecterLabel);
+const descriptionCollecter = Html.createNewTextAreaWithId(TEXT_AREA_ID);
+
+descriptionCollecter.name = TASK_DESCRIPTION_VALUE_HOLDER;
+descriptionCollecter.rows = TEXT_AREA_NUMBER_OF_LINES;
+descriptionCollecter.cols = TEXT_AREA_NUMBER_OF_WORDS_PER_LINE;
+
+
 const taskPopupBodyRightLow = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_LOW_CLASSNAME);
+const dueDateContainer = Html.createNewDivWithClassName(DUE_DATE_CONTAINER_CLASSNAME);
+const dueDateLabel = Html.createNewLabelFor(DUE_DATE_COLLECTER_ID);
+Html.useTextAsInnerHtmlOfNode(DUE_DATE_LABEL_TEXT, dueDateLabel);
+const dueDateCollecter = Html.createDateInputWithId(DUE_DATE_COLLECTER_ID);
+
+const importanceCheckBoxContainer = Html.createNewDivWithClassName(IMPORTANCE_CHECKBOX_CONTAINER_CALSSNAME);
+const checkboxLabel = Html.createNewLabelFor(CHECKBOX_ID);
+Html.useTextAsInnerHtmlOfNode(CHEBOX_LABEL_TEXT, checkboxLabel);
+const checkbox = Html.createNewCheckboxInputWithid(CHECKBOX_ID);
+const taskPopupAddButton = Html.createNewDivWithClassName(ADD_TASK_BUTTON_CLASSNAME);
+Html.useTextAsInnerHtmlOfNode(ADD_TASK_TEXT, taskPopupAddButton);
+
+
+const taskPopupContainerItems = [taskPopupHeader, taskPopupBody];
+const taskPopupBodyItems = [taskPopupBodyLeft, taskPopupBodyRight];
+const taskPopupBodyRightItems = [taskPopupBodyRightUp, taskPopupBodyRightLow];
+const taskTitleCollecterContainerItems = [taskTitleCollecterLabel, taskTitleCollecter];
+const descriptionCollecterContainerItems = [descriptionCollecterLabel, descriptionCollecter];
+const taskPopupBodyRightUpItems = [taskTitleCollecterContainer, descriptionCollecterContainer];
+const dueDateContainerItems = [dueDateLabel, dueDateCollecter];
+const importanceCheckBoxContainerItems = [checkboxLabel, checkbox];
+const taskPopupBodyRightLowItems = [dueDateContainer, importanceCheckBoxContainer, taskPopupAddButton];
+
+
+
+
+taskTitleCollecterContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, taskTitleCollecterContainer);
+})
+
+descriptionCollecterContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, descriptionCollecterContainer);
+})
+
+taskPopupBodyRightUpItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRightUp);
+})
+
+dueDateContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, dueDateContainer);
+})
+
+importanceCheckBoxContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, importanceCheckBoxContainer);
+})
+
+taskPopupBodyRightLowItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRightLow);
+})
+
+taskPopupBodyRightItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRight);
+})
+
+taskPopupBodyItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, taskPopupBody);
+})
+
+taskPopupContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, taskPopupContainer);
+})
+
+
+
 
 
 
@@ -238,7 +335,7 @@ export {
     sheduleReducedIconNode, newProjectLine, newProjectLeftIconContainer,
     newProjectLineRightIconContainer, newProjectLineTitleContainer,
     newTaskLine, newTaskLineIcon, newTaskLineTitleContainer, newProjectPopup,
-    Project, tasksTable
+    Project, tasksTable, taskPopupContainer
 };
 
 

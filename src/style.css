@@ -309,6 +309,164 @@ body {
     opacity: .9;
 }
 
+.task-popup-container {
+    width: 70%;
+    height: 40vh;
+
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 8fr;
+    grid-template-areas: "popupHeader popupHeader"
+        " popupBody popupBody";
+}
+
+.task-popup-header {
+    height: 40px;
+    grid-area: popupHeader;
+    background-color: var(--header-background-color);
+
+
+}
+
+.task-popup-body {
+
+    grid-area: popupBody;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "taskPopupBodyLeft taskPopupBodyRight";
+    color: var(--header-background-color);
+    font-size: .8rem;
+    font-weight: bold;
+    font-family: var(--left-side-font);
+
+
+}
+
+.task-popup-body-left {
+    grid-area: taskPopupBodyLeft;
+    background-color: var(--left-container-backgroud);
+    opacity: .6;
+}
+
+.task-popup-body-right {
+    grid-area: taskPopupBodyRight;
+    background-image: url('./images/back.jpg');
+    background-size: cover;
+    opacity: .9;
+    padding-top: .7rem;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 1.3fr 1fr;
+    grid-template-areas:
+        "taskPopupBodyRightUp  ..."
+        " ... ... "
+        "taskPopupBodyRightLow  taskPopupBodyRightLow "
+    ;
+    padding-left: var(--left-side-padding);
+
+}
+
+.task-popup-body-right-up label {
+    display: block;
+    width: 90%;
+    cursor: pointer;
+
+
+}
+
+.task-popup-body-right-up {
+    grid-area: taskPopupBodyRightUp;
+}
+
+#task-title-collecter {
+    background-color: var(--profilename-underline-color);
+    border: none;
+    opacity: 1;
+    width: 90%;
+    color: var(--header-background-color);
+    font-family: var(--left-side-font);
+}
+
+#task-description-collecter {
+    background-color: var(--profilename-underline-color);
+    border: none;
+    width: 90%;
+    color: var(--header-background-color);
+    font-family: var(--left-side-font);
+}
+
+.description-collecter-container {
+    margin-top: .7rem;
+}
+
+.task-popup-body-right-low {
+    grid-area: taskPopupBodyRightLow;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 1fr .8fr;
+    grid-template-areas:
+        "dueDateContainer ...."
+        "importanceCheckBoxContainer ..."
+        "...  addTask"
+    ;
+}
+
+.task-popup-body-right-low label {
+    display: block;
+    width: 45%;
+    cursor: pointer;
+}
+
+.due-date-container {
+    grid-area: dueDateContainer;
+
+}
+
+#due-date {
+    background-color: var(--profilename-underline-color);
+    border: none;
+    width: 45%;
+    cursor: pointer;
+}
+
+.importance-checkbox-container {
+    grid-area: importanceCheckBoxContainer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    color: var(--profilename-underline-color);
+}
+
+
+
+#importance-check {
+    width: 1rem;
+    height: 1rem;
+}
+
+.add-task {
+    grid-area: addTask;
+    font-size: clamp(.5rem, .75rem, 1.2rem);
+    width: clamp(1.5rem, 80%, 4rem);
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .2rem;
+    cursor: pointer;
+    background-color: green;
+    color: var(--profilename-underline-color);
+}
+
+.add-task:active {
+    box-shadow: .1rem .1rem;
+    opacity: .7;
+}
+
+
 .footer {
     justify-self: flex-end;
     height: 2rem;

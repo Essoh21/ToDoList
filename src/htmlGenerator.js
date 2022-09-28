@@ -1,13 +1,80 @@
 
 
+function createNewCheckboxInputWithid(checkboxId) {
+    const newCheckboxInput = createNewCheckboxInput();
+    newCheckboxInput.id = checkboxId;
+    return newCheckboxInput;
+}
+
+function createNewCheckboxInput() {
+    const newCheckboxInput = document.createElement('input');
+    newCheckboxInput.type = 'checkbox';
+    return newCheckboxInput;
+}
+
+
+function createDateInputWithId(inputId) {
+    const newDateInput = createNewDateInput();
+    newDateInput.id = inputId;
+    return newDateInput;
+}
+
+function createNewDateInput() {
+    const newDateInput = document.createElement('input');
+    newDateInput.type = 'date';
+    return newDateInput;
+}
+
+
+function createNewTextAreaWithId(textAreaId) {
+    const newTextArea = createNewTextArea();
+    newTextArea.id = textAreaId;
+    return newTextArea;
+}
+
+function createNewTextArea() {
+    const newTextArea = document.createElement('textarea');
+    return newTextArea;
+}
+
+
+function createNewLabelFor(labelFor) {
+    const label = createNewLabel();
+    addlabelForToLabel(labelFor, label);
+    return label
+}
+
+function createNewLabel() {
+    const newLabel = document.createElement('label');
+    return newLabel;
+}
+
+function addlabelForToLabel(labelFor, targetlabel) {
+    targetlabel.htmlFor = `${labelFor}`;
+}
+
+
+function createNewTextInputWithId(inputId) {
+    const newInput = createNewTextInput();
+    addIdToNode(inputId, newInput);
+    return newInput;
+
+}
+function addIdToNode(nodeId, targetNode) {
+    targetNode.id = nodeId;
+}
+
 function createNewFormWithClassName(className) {
     const newForm = createNewForm();
     addClassNameToNode(className, newForm);
+    return newForm;
 }
 function createNewForm() {
     const newForm = document.createElement('form');
     return newForm;
 }
+
+
 
 function createNewDivWithClassName(className) {
     const newDiv = createNewDiv();
@@ -80,11 +147,11 @@ function cleanInputValueOfNode(inputNode) {
 
 
 export {
-    createNewDivWithClassName, createNewImgTagWithClassName,
-    createNewTextInputWithClassName, createNewFormWithClassName,
-    addSrcToImgNode, addAltToImgNode, useTextAsInnerHtmlOfNode,
+    createNewDivWithClassName, createNewImgTagWithClassName, createNewTextInputWithId,
+    createNewTextInputWithClassName, createNewFormWithClassName, createNewLabelFor,
+    addSrcToImgNode, addAltToImgNode, useTextAsInnerHtmlOfNode, createNewTextAreaWithId,
     appendHtmlChildNodeToParentNode, displayFlexNode, removeFlexNode, cleanNodeInnerHtml,
-    cleanInputValueOfNode
+    cleanInputValueOfNode, createDateInputWithId, createNewCheckboxInputWithid
 }
 
 

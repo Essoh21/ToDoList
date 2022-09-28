@@ -97,6 +97,7 @@ Html.appendHtmlChildNodeToParentNode(Shedule.newTaskLine, tasksContainer);
 Html.useTextAsInnerHtmlOfNode(NEW_TASK_LINE_TITLE, Shedule.newTaskLineTitleContainer);
 
 Html.appendHtmlChildNodeToParentNode(Shedule.tasksTable, tasksContainer);
+Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksContainer)
 
 
 // Handling Events
