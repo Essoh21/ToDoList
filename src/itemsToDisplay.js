@@ -336,6 +336,113 @@ Html.addAltToImgNode(NEW_TASK_LINE_ICON_ALT, newTaskLine);
 const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
 
 
+// What is going to be displayed as Task 
+
+class Task {
+    constructor(
+        titleContainerClassName = 'task-title-container',
+        taskEditIconContainerClassName = 'task-edit-icon',
+        editIconAlt = 'edit icon', editIconSrc = Icons.editIcon,
+        taskIconAlt = 'task icon', taskIconSrc = Icons.taskIcon,
+        dueDateContainerClassName = 'duedate-container', completionInputId = 'completion-id',
+        taskIconContainerClassName = 'task-icon', editIconClassName = 'edit-icon',
+        deleteIconClassName = 'delete-icon', deleteIconSrc = Icons.trashIcon,
+        deleteIconAlt = 'trash icon',
+        completionContainerClassName = 'completion-container',
+        completionInputLabelclassName = 'completion-input-label',
+        taskContainerClassName = 'task-container', taskTitle = 'no title',
+        dueDate = 'no date'
+
+    ) {
+        this.titleContainerClassName = titleContainerClassName;
+        this.taskEditIconContainerClassName = taskEditIconContainerClassName;
+        this.taskIconAlt = taskIconAlt;
+        this.taskIconSrc = taskIconSrc;
+        this.editIconSrc = editIconSrc;
+        this.editIconAlt = editIconAlt;
+        this.dueDateContainerClassName = dueDateContainerClassName;
+        this.completionInputId = completionInputId;
+        this.taskIconContainerClassName = taskIconContainerClassName;
+        this.editIconClassName = editIconClassName;
+        this.deleteIconClassName = deleteIconClassName;
+        this.deleteIconSrc = deleteIconSrc;
+        this.deleteIconAlt = deleteIconAlt;
+        this.completionContainerClassName = completionContainerClassName;
+        this.completionInputLabelclassName = completionInputLabelclassName;
+        this.taskContainerClassName = taskContainerClassName;
+        this.dueDate = dueDate;
+        this.taskTitle = taskTitle;
+    }
+
+
+    createTaskIcon() {
+        const taskIcon = Html.createNewImgTagWithClassName(this.taskIconContainerClassName);
+        Html.addSrcToImgNode(this.taskIconSrc, taskIcon);
+        Html.addAltToImgNode(this.taskIconAlt, taskIcon);
+        return taskIcon;
+
+    }
+
+    createEditIcon() {
+        const editIcon = Html.createNewImgTagWithClassName(this.editIconClassName);
+        Html.addSrcToImgNode(this.editIconSrc, editIcon);
+        Html.addAltToImgNode(this.editIconAlt, editIcon);
+        return editIcon;
+    }
+
+    createTrashIcon() {
+        const trashIcon = Html.createNewImgTagWithClassName(this.deleteIconClassName);
+        Html.addSrcToImgNode(this.deleteIconSrc, trashIcon);
+        Html.addAltToImgNode(this.deleteIconAlt, trashIcon);
+        return trashIcon;
+    }
+
+    createTitleContainerWithtitle() {
+        const titleContainer = Html.createNewDivWithClassName(this.titleContainerClassName);
+        Html.useTextAsInnerHtmlOfNode(this.taskTitle, titleContainer);
+        return titleContainer;
+    }
+
+    createDuedateContainerWithDueDate() {
+        const dueDateContainer = Html.createNewDivWithClassName(this.dueDateContainerClassName);
+        Html.useTextAsInnerHtmlOfNode(this.dueDate, dueDateContainer)
+        return dueDateContainer;
+    }
+
+    createCompletionStatusContainer() {
+        const completionContainer = Html.createNewDivWithClassName(this.completionContainerClassName);
+        const completionInput = Html.createNewCheckboxInputWithid(this.completionInputId);
+        const completionInputLabel = Html.createNewLabelFor(this.completionInputId);
+        completionInputLabel.className = this.completionInputLabelclassName;
+        const completionContainerItems = [completionInputLabel, completionInput];
+        completionContainerItems.forEach((item) => {
+            Html.appendHtmlChildNodeToParentNode(item, completionContainer);
+        })
+        return completionContainer;
+
+    }
+
+    createNewTask() {
+        const newTaskContainer = Html.createNewDivWithClassName(this.taskContainerClassName);
+        const taskIcon = this.createTaskIcon().cloneNode(true);
+        const taskTitleContainer = this.createTitleContainerWithtitle();
+        const editIcon = this.createEditIcon().cloneNode(true);
+        const dueDateContainer = this.createDuedateContainerWithDueDate();
+        const taskCompletioncontainer = this.createCompletionStatusContainer();
+        const trashIcon = this.createTrashIcon().cloneNode(true);
+        const newTaskContainerItems = [taskIcon, taskTitleContainer, editIcon, dueDateContainer,
+            taskCompletioncontainer, trashIcon
+        ]
+        newTaskContainerItems.forEach((item) => {
+            Html.appendHtmlChildNodeToParentNode(item, newTaskContainer);
+        })
+        return newTaskContainer;
+
+    }
+
+}
+
+
 
 
 export {
@@ -343,7 +450,7 @@ export {
     sheduleReducedIconNode, newProjectLine, newProjectLeftIconContainer,
     newProjectLineRightIconContainer, newProjectLineTitleContainer,
     newTaskLine, newTaskLineIcon, newTaskLineTitleContainer, newProjectPopup,
-    Project, tasksTable, taskPopupContainer
+    Project, tasksTable, taskPopupContainer, Task
 };
 
 

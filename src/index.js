@@ -185,8 +185,9 @@ newProjectAddButton.addEventListener('click', () => {
 })
 
 
-// new task Popup  Events
+// new task Popup  
 
+let newTaskTitle = '';
 
 //usefull functions 
 
@@ -206,13 +207,25 @@ function displayNewTaskPopup() {
     Html.displayNodeAsGrid(newTaskPopup);
 }
 
+function createNewTaskWithTitle(newTaskTitle) {
+    const newTaskElement = new Shedule.Task();
+    const newTask = newTaskElement.createNewTask();
+    newTask.taskTitle = newTaskTitle;
+    return newTask;
+}
+
+function apdateTaskTitle() {
+    const taskTitleCollecter = document.querySelector('.task-title-collecter');
+    newTaskTitle = taskTitleCollecter.value;
+}
+
 //Nodes to look 
 
 const newTaskLine = document.querySelector('.new-task-line');
-const newTaskAddButton = document.querySelector('.new-task-add-button');
 const closeIcon = document.querySelector('.close-icon');
 const taskAddButton = document.querySelector('.add-task');
 const newTaskPopup = document.querySelector('.task-popup-container');
+
 
 
 // new task Popup EventListeners
@@ -226,6 +239,9 @@ newTaskLine.addEventListener('click', () => {
 taskAddButton.addEventListener('click', () => {
     removeNewTaskPopup();
     displayNewTaskLine();
+    // apdateTaskTitle();
+
+    Html.appendHtmlChildNodeToParentNode(createNewTaskWithTitle(), tasksContainer);
 })
 
 closeIcon.addEventListener('click', () => {

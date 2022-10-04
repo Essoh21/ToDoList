@@ -393,7 +393,9 @@ body {
     background-color: var(--profilename-underline-color);
     border: none;
     opacity: 1;
+    height: 1.5rem;
     width: 90%;
+    padding: 0 .5rem;
     color: var(--header-background-color);
     font-family: var(--left-side-font);
 }
@@ -404,6 +406,7 @@ body {
     width: 90%;
     color: var(--header-background-color);
     font-family: var(--left-side-font);
+    padding: .5rem;
 }
 
 .description-collecter-container {
