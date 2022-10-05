@@ -177,7 +177,80 @@ class Project {
 
 }
 
-// right Container 
+//+++++++++++++ Tasks container 
+
+const TASKS_BODY_CONTAINER_HEADER_CLASSNAME = 'tasks-header';
+const TASKS_TABLE_CLASSNAME = 'tasks-table';
+const COLUMNS_HEADERS_CONTAINER_CLASSNAME = 'columns-headers-container';
+const HEADER_EDIT_CLASSNAME = 'header-edit';
+const HEADER_COMPLETED_CLASSNAME = 'header-completed';
+const HEADER_DATE_CLASSNAME = 'header-date';
+const HEADER_DELETE_CLASSNAME = 'header-delete';
+const TASKS_CONTAINER_CLASSNAME = 'tasks-container';
+
+
+// tasksContainer header 
+
+const tasksContainerHeader = Html.createNewDivWithClassName(TASKS_BODY_CONTAINER_HEADER_CLASSNAME);
+
+//+++++tasks table 
+
+const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
+
+// The line to click in order to load newtask popup
+const NEW_TASK_LINE_CLASSNAME = 'new-task-line';
+const NEW_TASK_LINE_ICON_CLASSNAME = 'new-task-line-icon';
+const NEW_TASK_LINE_ICON_ALT = 'plus icon';
+const NEW_TASK_LINE_TITLE_CLASSNAME = 'new-task-line-title';
+const NEW_TASK_LINE_TITLE = 'Click to add a task to do '
+
+
+const newTaskLine = Html.createNewDivWithClassName(NEW_TASK_LINE_CLASSNAME);
+const newTaskLineTitleContainer = Html.createNewDivWithClassName(NEW_TASK_LINE_TITLE_CLASSNAME);
+Html.useTextAsInnerHtmlOfNode(NEW_TASK_LINE_TITLE, newTaskLineTitleContainer);
+const newTaskLineIcon = Html.createNewImgTagWithClassName(NEW_TASK_LINE_ICON_CLASSNAME);
+Html.addSrcToImgNode(Icons.addPlusIcon, newTaskLineIcon);
+Html.addAltToImgNode(NEW_TASK_LINE_ICON_ALT, newTaskLineIcon);
+
+
+const newTaskLineItems = [
+    newTaskLineIcon, newTaskLineTitleContainer
+];
+
+newTaskLineItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, newTaskLine);
+})
+
+
+// columns headers 
+
+const columnsHeadersContainer = Html.createNewDivWithClassName(COLUMNS_HEADERS_CONTAINER_CLASSNAME);
+const headerEdit = Html.createNewDivWithClassName(HEADER_EDIT_CLASSNAME);
+const headerDate = Html.createNewDivWithClassName(HEADER_DATE_CLASSNAME);
+const headerCompleted = Html.createNewDivWithClassName(HEADER_COMPLETED_CLASSNAME);
+const headerDelete = Html.createNewDivWithClassName(HEADER_DELETE_CLASSNAME);
+
+const columnsHeadersContainerItems = [
+    headerEdit, headerDate, headerCompleted, headerDelete
+]
+columnsHeadersContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, columnsHeadersContainer);
+})
+
+//    
+
+const tasksContainer = Html.createNewDivWithClassName(TASKS_CONTAINER_CLASSNAME);
+
+const tasksTableItems = [
+    newTaskLine, columnsHeadersContainer, tasksContainer
+]
+tasksTableItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, tasksTable);
+})
+
+//
+
+
 
 
 // new Task popup
@@ -210,11 +283,6 @@ const CLOSE_ICON_CLASSNAME = 'close-icon';
 const CLOSE_TASKPOPUP_ICON_ALT = 'close icon';
 const CLOSE_TASKPOPUP_ICON_SRC = Icons.closeIcon;
 const CLOSE_ICON_TITLE = 'Click to cancel';
-
-
-
-
-
 
 
 
@@ -316,24 +384,6 @@ taskPopupContainerItems.forEach((item) => {
 
 
 
-
-
-
-
-// The line to click in order to load newtask popup
-const NEW_TASK_LINE_CLASSNAME = 'new-task-line';
-const NEW_TASK_LINE_ICON_CLASSNAME = 'new-task-line-icon';
-const NEW_TASK_LINE_ICON_ALT = 'plus icon';
-const NEW_TASK_LINE_TITLE_CLASSNAME = 'new-task-line-title';
-const TASKS_TABLE_CLASSNAME = 'tasks-table';
-
-const newTaskLine = Html.createNewDivWithClassName(NEW_TASK_LINE_CLASSNAME);
-const newTaskLineTitleContainer = Html.createNewDivWithClassName(NEW_TASK_LINE_TITLE_CLASSNAME);
-const newTaskLineIcon = Html.createNewImgTagWithClassName(NEW_TASK_LINE_ICON_CLASSNAME);
-Html.addSrcToImgNode(Icons.addPlusIcon, newTaskLineIcon);
-Html.addAltToImgNode(NEW_TASK_LINE_ICON_ALT, newTaskLine);
-
-const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
 
 
 // What is going to be displayed as Task 
@@ -449,8 +499,8 @@ export {
     sheduleContainersNodes, sheduleHeaderTitlesNodes, sheduleLogosNodes,
     sheduleReducedIconNode, newProjectLine, newProjectLeftIconContainer,
     newProjectLineRightIconContainer, newProjectLineTitleContainer,
-    newTaskLine, newTaskLineIcon, newTaskLineTitleContainer, newProjectPopup,
-    Project, tasksTable, taskPopupContainer, Task
+    newProjectPopup, tasksContainerHeader,
+    Project, tasksTable, tasksContainer, taskPopupContainer, Task
 };
 
 

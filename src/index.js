@@ -83,21 +83,20 @@ Html.appendHtmlChildNodeToParentNode(Shedule.newProjectLine, projectsContainer);
 
 //  application body 
 
-const tasksContainer = document.querySelector('.tasksContainer');
-const NEW_TASK_LINE_TITLE = 'Click to add a task to do '
+const tasksBodyContainer = document.querySelector('.tasksBodyContainer');
 
-const newTaskLineItems = [
-    Shedule.newTaskLineIcon, Shedule.newTaskLineTitleContainer
-];
+const tasksBodyContainerItems = [Shedule.tasksContainerHeader,
+Shedule.tasksTable
+]
 
-newTaskLineItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, Shedule.newTaskLine);
+tasksBodyContainerItems.forEach((item) => {
+    Html.appendHtmlChildNodeToParentNode(item, tasksBodyContainer);
 })
-Html.appendHtmlChildNodeToParentNode(Shedule.newTaskLine, tasksContainer);
-Html.useTextAsInnerHtmlOfNode(NEW_TASK_LINE_TITLE, Shedule.newTaskLineTitleContainer);
 
-Html.appendHtmlChildNodeToParentNode(Shedule.tasksTable, tasksContainer);
-Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksContainer)
+// adding Tasks popup
+
+Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksBodyContainer);
+
 
 
 // Handling Events
@@ -241,7 +240,7 @@ taskAddButton.addEventListener('click', () => {
     displayNewTaskLine();
     // apdateTaskTitle();
 
-    Html.appendHtmlChildNodeToParentNode(createNewTaskWithTitle(), tasksContainer);
+    Html.appendHtmlChildNodeToParentNode(createNewTaskWithTitle(), tasksBodyContainer);
 })
 
 closeIcon.addEventListener('click', () => {
