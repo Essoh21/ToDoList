@@ -224,6 +224,7 @@ const newTaskLine = document.querySelector('.new-task-line');
 const closeIcon = document.querySelector('.close-icon');
 const taskAddButton = document.querySelector('.add-task');
 const newTaskPopup = document.querySelector('.task-popup-container');
+const tableTasksContainer = document.querySelector('.table-tasks-container');
 
 
 
@@ -238,9 +239,9 @@ newTaskLine.addEventListener('click', () => {
 taskAddButton.addEventListener('click', () => {
     removeNewTaskPopup();
     displayNewTaskLine();
-    // apdateTaskTitle();
 
-    Html.appendHtmlChildNodeToParentNode(createNewTaskWithTitle(), tasksBodyContainer);
+
+    Html.appendHtmlChildNodeToParentNode(createNewTaskWithTitle(), tableTasksContainer);
 })
 
 closeIcon.addEventListener('click', () => {

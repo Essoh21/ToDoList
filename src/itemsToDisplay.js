@@ -186,13 +186,13 @@ const HEADER_EDIT_CLASSNAME = 'header-edit';
 const HEADER_COMPLETED_CLASSNAME = 'header-completed';
 const HEADER_DATE_CLASSNAME = 'header-date';
 const HEADER_DELETE_CLASSNAME = 'header-delete';
-const TASKS_CONTAINER_CLASSNAME = 'tasks-container';
+const TABLE_TASKS_CONTAINER_CLASSNAME = 'table-tasks-container';
 
 
 // tasksContainer header 
 
 const tasksContainerHeader = Html.createNewDivWithClassName(TASKS_BODY_CONTAINER_HEADER_CLASSNAME);
-
+Html.useTextAsInnerHtmlOfNode('Project Title', tasksContainerHeader);
 //+++++tasks table 
 
 const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
@@ -223,12 +223,25 @@ newTaskLineItems.forEach((item) => {
 
 
 // columns headers 
+const HEADER_EDIT_INNER_TEXT = 'Edit';
+const HEADER_DATES_INNER_TEXT = 'Dates';
+const HEADER_COMPLETED_INNER_TEXT = 'Completed';
+const HEADER_DELETE_INNER_TEXT = 'Delete';
 
 const columnsHeadersContainer = Html.createNewDivWithClassName(COLUMNS_HEADERS_CONTAINER_CLASSNAME);
 const headerEdit = Html.createNewDivWithClassName(HEADER_EDIT_CLASSNAME);
+Html.useTextAsInnerHtmlOfNode(HEADER_EDIT_INNER_TEXT, headerEdit);
+
 const headerDate = Html.createNewDivWithClassName(HEADER_DATE_CLASSNAME);
+Html.useTextAsInnerHtmlOfNode(HEADER_DATES_INNER_TEXT, headerDate);
+
 const headerCompleted = Html.createNewDivWithClassName(HEADER_COMPLETED_CLASSNAME);
+Html.useTextAsInnerHtmlOfNode(HEADER_COMPLETED_INNER_TEXT, headerCompleted);
+
 const headerDelete = Html.createNewDivWithClassName(HEADER_DELETE_CLASSNAME);
+Html.useTextAsInnerHtmlOfNode(HEADER_DELETE_INNER_TEXT, headerDelete);
+
+
 
 const columnsHeadersContainerItems = [
     headerEdit, headerDate, headerCompleted, headerDelete
@@ -239,7 +252,7 @@ columnsHeadersContainerItems.forEach((item) => {
 
 //    
 
-const tasksContainer = Html.createNewDivWithClassName(TASKS_CONTAINER_CLASSNAME);
+const tasksContainer = Html.createNewDivWithClassName(TABLE_TASKS_CONTAINER_CLASSNAME);
 
 const tasksTableItems = [
     newTaskLine, columnsHeadersContainer, tasksContainer
@@ -401,7 +414,8 @@ class Task {
         completionContainerClassName = 'completion-container',
         completionInputLabelclassName = 'completion-input-label',
         taskContainerClassName = 'task-container', taskTitle = 'no title',
-        dueDate = 'no date'
+        dueDate = 'no date',
+        taskIconAndTitleContainerClassName = 'task-icon-and-title-container'
 
     ) {
         this.titleContainerClassName = titleContainerClassName;
@@ -422,6 +436,7 @@ class Task {
         this.taskContainerClassName = taskContainerClassName;
         this.dueDate = dueDate;
         this.taskTitle = taskTitle;
+        this.taskIconAndTitleContainerClassName = taskIconAndTitleContainerClassName;
     }
 
 
@@ -452,6 +467,10 @@ class Task {
         Html.useTextAsInnerHtmlOfNode(this.taskTitle, titleContainer);
         return titleContainer;
     }
+    createTaskIconAndTitleContainer() {
+        const taskIconAndTitleContainer = Html.createNewDivWithClassName(this.taskIconAndTitleContainerClassName);
+        return taskIconAndTitleContainer;
+    }
 
     createDuedateContainerWithDueDate() {
         const dueDateContainer = Html.createNewDivWithClassName(this.dueDateContainerClassName);
@@ -476,11 +495,16 @@ class Task {
         const newTaskContainer = Html.createNewDivWithClassName(this.taskContainerClassName);
         const taskIcon = this.createTaskIcon().cloneNode(true);
         const taskTitleContainer = this.createTitleContainerWithtitle();
+        const taskIconAndTitleContainer = this.createTaskIconAndTitleContainer();
+        const taskIconAndTitleContainerItems = [taskIcon, taskTitleContainer];
+        taskIconAndTitleContainerItems.forEach((item) => {
+            Html.appendHtmlChildNodeToParentNode(item, taskIconAndTitleContainer);
+        })
         const editIcon = this.createEditIcon().cloneNode(true);
         const dueDateContainer = this.createDuedateContainerWithDueDate();
         const taskCompletioncontainer = this.createCompletionStatusContainer();
         const trashIcon = this.createTrashIcon().cloneNode(true);
-        const newTaskContainerItems = [taskIcon, taskTitleContainer, editIcon, dueDateContainer,
+        const newTaskContainerItems = [taskIconAndTitleContainer, editIcon, dueDateContainer,
             taskCompletioncontainer, trashIcon
         ]
         newTaskContainerItems.forEach((item) => {
