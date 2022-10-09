@@ -93,11 +93,6 @@ tasksBodyContainerItems.forEach((item) => {
     Html.appendHtmlChildNodeToParentNode(item, tasksBodyContainer);
 })
 
-// adding Tasks popup
-
-Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksBodyContainer);
-
-
 
 // Handling Events
 
@@ -184,11 +179,27 @@ newProjectAddButton.addEventListener('click', () => {
 })
 
 
-// new task Popup  
+// adding Tasks popup
+
+Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksBodyContainer);
+
+//  collecting a new task information 
+
+const activeProjectTasks = [];
+
 
 let newTaskTitle = '';
 
 //usefull functions 
+function addNewTaskToActiveProjectTasks() {
+    activeProjectTasks.push(createNewTaskWithTitle(newTaskTitle))
+}
+
+function displayActiveProjectTasks() {
+    activeProjectTasks.slice().reverse().forEach((task) => {
+        Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
+    })
+}
 
 function removeNewTaskLine() {
     Html.removeFlexNode(newTaskLine);
@@ -206,15 +217,15 @@ function displayNewTaskPopup() {
     Html.displayNodeAsGrid(newTaskPopup);
 }
 
-function createNewTaskWithTitle(newTaskTitle) {
+function createNewTaskWithTitle(currentTaskTitle) {
     const newTaskElement = new Shedule.Task();
+    newTaskElement.taskTitle = currentTaskTitle;
     const newTask = newTaskElement.createNewTask();
-    newTask.taskTitle = newTaskTitle;
     return newTask;
 }
 
-function apdateTaskTitle() {
-    const taskTitleCollecter = document.querySelector('.task-title-collecter');
+function getNewTaskTitle() {
+    const taskTitleCollecter = document.querySelector('#task-title-collecter');
     newTaskTitle = taskTitleCollecter.value;
 }
 
@@ -240,8 +251,9 @@ taskAddButton.addEventListener('click', () => {
     removeNewTaskPopup();
     displayNewTaskLine();
 
-
-    Html.appendHtmlChildNodeToParentNode(createNewTaskWithTitle(), tableTasksContainer);
+    getNewTaskTitle();
+    addNewTaskToActiveProjectTasks();
+    displayActiveProjectTasks();
 })
 
 closeIcon.addEventListener('click', () => {
