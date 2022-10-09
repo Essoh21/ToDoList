@@ -415,7 +415,8 @@ class Task {
         completionInputLabelclassName = 'completion-input-label',
         taskContainerClassName = 'task-container', taskTitle = 'no title',
         dueDate = 'no date',
-        taskIconAndTitleContainerClassName = 'task-icon-and-title-container'
+        taskIconAndTitleContainerClassName = 'task-icon-and-title-container',
+        checkmarkContainerClassName = 'checkmark-container'
 
     ) {
         this.titleContainerClassName = titleContainerClassName;
@@ -437,6 +438,7 @@ class Task {
         this.dueDate = dueDate;
         this.taskTitle = taskTitle;
         this.taskIconAndTitleContainerClassName = taskIconAndTitleContainerClassName;
+        this.checkmarkContainerClassName = checkmarkContainerClassName;
     }
 
 
@@ -480,13 +482,16 @@ class Task {
 
     createCompletionStatusContainer() {
         const completionContainer = Html.createNewDivWithClassName(this.completionContainerClassName);
-        const completionInput = Html.createNewCheckboxInputWithid(this.completionInputId);
-        const completionInputLabel = Html.createNewLabelFor(this.completionInputId);
+        const completionInput = Html.createNewCheckboxInput();
+        const completionInputLabel = Html.createNewLabel();
+        const checkmarkContainer = Html.createNewSpan();
+        checkmarkContainer.className = this.checkmarkContainerClassName;
         completionInputLabel.className = this.completionInputLabelclassName;
-        const completionContainerItems = [completionInputLabel, completionInput];
-        completionContainerItems.forEach((item) => {
-            Html.appendHtmlChildNodeToParentNode(item, completionContainer);
+        const completionInputLabelItems = [completionInput, checkmarkContainer];
+        completionInputLabelItems.forEach((item) => {
+            Html.appendHtmlChildNodeToParentNode(item, completionInputLabel);
         })
+        Html.appendHtmlChildNodeToParentNode(completionInputLabel, completionContainer);
         return completionContainer;
 
     }

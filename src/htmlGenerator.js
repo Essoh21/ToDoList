@@ -129,6 +129,17 @@ function createNewTextInput() {
     return newInput;
 }
 
+function createNewSpanWithClassName(spanClassName) {
+    const newSpan = createNewSpan();
+    newSpan.className = `${spanClassName}`;
+    return newSpan;
+}
+
+function createNewSpan() {
+    const newSpan = document.createElement('span');
+    return newSpan;
+}
+
 function displayFlexNode(flexNode) {
     flexNode.style.display = 'flex';
 }
@@ -164,7 +175,7 @@ export {
     addSrcToImgNode, addAltToImgNode, useTextAsInnerHtmlOfNode, createNewTextAreaWithId,
     appendHtmlChildNodeToParentNode, displayFlexNode, removeFlexNode, cleanNodeInnerHtml,
     cleanInputValueOfNode, createDateInputWithId, createNewCheckboxInputWithid, displayNodeAsBlock, removeNode,
-    displayNodeAsGrid
+    displayNodeAsGrid, createNewCheckboxInput, createNewLabel, createNewSpanWithClassName, createNewSpan
 }
 
 
