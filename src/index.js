@@ -254,12 +254,64 @@ taskAddButton.addEventListener('click', () => {
     getNewTaskTitle();
     addNewTaskToActiveProjectTasks();
     displayActiveProjectTasks();
+
+    // deleting tasks
+    const trashsIcons = selectAndReturnAllDeleteIconsNodesAsArray();
+
+    trashsIcons.forEach((icon, index) => {
+        icon.addEventListener('click', () => {
+            /* let confirmmation = confirm('Do you realy want to delete this task?');
+             if (confirmmation) {
+                 clearTasbleTasksContainer()
+                 deleteTaskOfIndexAndDisplayActiveProjectTasks(index);
+             } */
+
+            alert(index);
+            alert(activeProjectTasks.indexOf(activeProjectTasks[index]));
+
+        }
+        )
+    })
+
 })
 
 closeIcon.addEventListener('click', () => {
     removeNewTaskPopup();
     displayNewTaskLine();
 })
+
+
+
+
+// ******************* deleting a task from active Projec
+
+// useful functions 
+
+function clearTasbleTasksContainer() {
+    tableTasksContainer.innerHTML = '';
+}
+
+function deleteTaskOfIndexAndDisplayActiveProjectTasks(index) {
+    deleteTaskOfIndexFromActiveProjectTasks(index);
+    displayActiveProjectTasks();
+}
+
+function removeItemOfIndexFromArray(itemIndex, arrayToUse) {
+    arrayToUse.splice(itemIndex, 1);
+}
+
+function deleteTaskOfIndexFromActiveProjectTasks(index) {
+    removeItemOfIndexFromArray(index, activeProjectTasks);
+}
+
+function selectAndReturnAllDeleteIconsNodesAsArray() {
+    const alldeleteIconsNodes = document.querySelectorAll('.delete-icon');
+    return alldeleteIconsNodes;
+}
+
+
+
+
 
 
 
