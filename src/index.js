@@ -247,31 +247,34 @@ newTaskLine.addEventListener('click', () => {
     displayNewTaskPopup();
 })
 
-taskAddButton.addEventListener('click', () => {
-    removeNewTaskPopup();
-    displayNewTaskLine();
 
-    getNewTaskTitle();
-    addNewTaskToActiveProjectTasks();
-    displayActiveProjectTasks();
+document.addEventListener('click', (element) => {
+    if (element.target.matches('.delete-icon')) {
+        const confirmation = confirm('Do you really want to delete that task?');
+        if (confirmation) {
+            deleteParentOfTrashIconNodeFromTableTaskscontainer(element.target);
+            removeParentOfTrashIconNodeFromActiveProjectTasks(element.target);
+        }
 
-    // deleting tasks
-    const trashIconsNodes = selectAndReturnAllDeleteIconsNodesAsArray();
-    trashIconsNodes.forEach((iconNode) => {
-        iconNode.addEventListener('click', () => {
-            deleteParentOfTrashIconNodeFromTableTaskscontainer(iconNode);
-            removeParentOfTrashIconNodeFromActiveProjectTasks(iconNode);
+    }
 
-        })
-    })
+    if (element.target.matches('.close-icon')) {
+        removeNewTaskPopup();
+        displayNewTaskLine();
+    }
+
+    if (element.target.matches('.add-task')) {
+        removeNewTaskPopup();
+        displayNewTaskLine();
+
+        getNewTaskTitle();
+        addNewTaskToActiveProjectTasks();
+        clearTableTasksContainer
+        displayActiveProjectTasks();
+
+    }
 
 })
-
-closeIcon.addEventListener('click', () => {
-    removeNewTaskPopup();
-    displayNewTaskLine();
-})
-
 
 
 
