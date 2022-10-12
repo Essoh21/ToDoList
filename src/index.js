@@ -256,21 +256,13 @@ taskAddButton.addEventListener('click', () => {
     displayActiveProjectTasks();
 
     // deleting tasks
-    const trashsIcons = selectAndReturnAllDeleteIconsNodesAsArray();
+    const trashIconsNodes = selectAndReturnAllDeleteIconsNodesAsArray();
+    trashIconsNodes.forEach((iconNode) => {
+        iconNode.addEventListener('click', () => {
+            deleteParentOfTrashIconNodeFromTableTaskscontainer(iconNode);
+            removeParentOfTrashIconNodeFromActiveProjectTasks(iconNode);
 
-    trashsIcons.forEach((icon, index) => {
-        icon.addEventListener('click', () => {
-            /* let confirmmation = confirm('Do you realy want to delete this task?');
-             if (confirmmation) {
-                 clearTasbleTasksContainer()
-                 deleteTaskOfIndexAndDisplayActiveProjectTasks(index);
-             } */
-
-            alert(index);
-            alert(activeProjectTasks.indexOf(activeProjectTasks[index]));
-
-        }
-        )
+        })
     })
 
 })
@@ -287,21 +279,24 @@ closeIcon.addEventListener('click', () => {
 
 // useful functions 
 
-function clearTasbleTasksContainer() {
+function deleteParentOfTrashIconNodeFromTableTaskscontainer(trashIconNode) {
+    trashIconNode.parentNode.parentNode.removeChild(trashIconNode.parentNode);
+}
+
+function clearTableTasksContainer() {
     tableTasksContainer.innerHTML = '';
 }
 
-function deleteTaskOfIndexAndDisplayActiveProjectTasks(index) {
-    deleteTaskOfIndexFromActiveProjectTasks(index);
-    displayActiveProjectTasks();
-}
 
 function removeItemOfIndexFromArray(itemIndex, arrayToUse) {
     arrayToUse.splice(itemIndex, 1);
 }
 
-function deleteTaskOfIndexFromActiveProjectTasks(index) {
-    removeItemOfIndexFromArray(index, activeProjectTasks);
+function removeParentOfTrashIconNodeFromActiveProjectTasks(trashIconNode) {
+    const trashIconParentNode = trashIconNode.parentNode.parentNode;
+    const trashIconParentNodeIndex = activeProjectTasks.indexOf(trashIconParentNode);
+    activeProjectTasks.splice(trashIconParentNodeIndex, 1);
+
 }
 
 function selectAndReturnAllDeleteIconsNodesAsArray() {
