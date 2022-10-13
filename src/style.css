@@ -252,6 +252,10 @@ body {
     opacity: .6;
 }
 
+.new-project-container:focus {
+    background-color: red;
+}
+
 
 .new-project-line {
 

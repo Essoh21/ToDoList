@@ -62,6 +62,9 @@ Html.appendHtmlChildNodeToParentNode(Shedule.newProjectPopup, projectsContainer)
 // all projects collecter 
 
 const allProjects = [];
+allProjects.push(createNewProjectWithTitle('Home Project'));
+
+
 
 
 // The line to click to  display popup to add a new project Title
@@ -77,6 +80,7 @@ newProjectLineItems.forEach((item) => {
 
 Html.useTextAsInnerHtmlOfNode(NEW_PROJECT_LINE_TITLE, Shedule.newProjectLineTitleContainer);
 Html.appendHtmlChildNodeToParentNode(Shedule.newProjectLine, projectsContainer);
+dispalayAllProjects();
 
 
 
@@ -232,10 +236,13 @@ function getNewTaskTitle() {
 //Nodes to look 
 
 const newTaskLine = document.querySelector('.new-task-line');
-const closeIcon = document.querySelector('.close-icon');
-const taskAddButton = document.querySelector('.add-task');
 const newTaskPopup = document.querySelector('.task-popup-container');
 const tableTasksContainer = document.querySelector('.table-tasks-container');
+
+const taskDescriptionCollecter = document.querySelector('#task-description-collecter');
+const dueDate = document.querySelector('#due-date');
+const importanceCheck = document.querySelector('#importance-check');
+
 
 
 
@@ -248,6 +255,7 @@ newTaskLine.addEventListener('click', () => {
 })
 
 
+// delegating click events 
 document.addEventListener('click', (element) => {
     if (element.target.matches('.delete-icon')) {
         const confirmation = confirm('Do you really want to delete that task?');
@@ -264,13 +272,16 @@ document.addEventListener('click', (element) => {
     }
 
     if (element.target.matches('.add-task')) {
-        removeNewTaskPopup();
+
         displayNewTaskLine();
 
         getNewTaskTitle();
+        Html.cleanInputValueOfNode(taskTitleCollecter)
+        removeNewTaskPopup();
         addNewTaskToActiveProjectTasks();
         clearTableTasksContainer
         displayActiveProjectTasks();
+        ;
 
     }
 
@@ -302,10 +313,6 @@ function removeParentOfTrashIconNodeFromActiveProjectTasks(trashIconNode) {
 
 }
 
-function selectAndReturnAllDeleteIconsNodesAsArray() {
-    const alldeleteIconsNodes = document.querySelectorAll('.delete-icon');
-    return alldeleteIconsNodes;
-}
 
 
 
