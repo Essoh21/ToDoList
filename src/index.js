@@ -62,7 +62,9 @@ Html.appendHtmlChildNodeToParentNode(Shedule.newProjectPopup, projectsContainer)
 // all projects collecter 
 
 const allProjects = [];
-allProjects.push(createNewProjectWithTitle('Home Project'));
+const homeProjectTitle = 'Home Project';
+const homeProject = createNewProjectWithTitle(homeProjectTitle)
+allProjects.push(homeProject);
 
 
 
@@ -82,13 +84,29 @@ Html.useTextAsInnerHtmlOfNode(NEW_PROJECT_LINE_TITLE, Shedule.newProjectLineTitl
 Html.appendHtmlChildNodeToParentNode(Shedule.newProjectLine, projectsContainer);
 dispalayAllProjects();
 
+//************** handling projects Selection  */
 
+let activeProjectNode = homeProject;
+let activeProjectTitle = activeProjectNode.childNodes[1].innerHTML;
 
+function changeActiveProjectNodeTo(newActiveProjectNode) {
+    activeProjectNode = newActiveProjectNode;
+}
+
+function updateActiveProjectTitle() {
+    activeProjectTitle = activeProjectNode.childNodes[1].innerHTML;
+}
+
+function updateTitleOfHeader() {
+    const tasksBodyContainerHeader = document.querySelector('.tasksBodyContainer>.tasks-header');
+    tasksBodyContainerHeader.innerHTML = activeProjectTitle;
+}
 
 //  application body 
 
 const tasksBodyContainer = document.querySelector('.tasksBodyContainer');
 
+Shedule.tasksContainerHeader.innerHTML = activeProjectTitle
 const tasksBodyContainerItems = [Shedule.tasksContainerHeader,
 Shedule.tasksTable
 ]
@@ -96,6 +114,7 @@ Shedule.tasksTable
 tasksBodyContainerItems.forEach((item) => {
     Html.appendHtmlChildNodeToParentNode(item, tasksBodyContainer);
 })
+
 
 
 // Handling Events
@@ -287,6 +306,18 @@ document.addEventListener('click', (element) => {
         displayActiveProjectTasks();
         ;
 
+    }
+
+    if (element.target.matches('.new-project-container') || element.target.parentNode.matches('.new-project-container')) {
+        if (element.target.matches('.new-project-container')) {
+            changeActiveProjectNodeTo(element.target);
+            updateActiveProjectTitle();
+            updateTitleOfHeader();
+        } else {
+            changeActiveProjectNodeTo(element.target.parentNode);
+            updateActiveProjectTitle();
+            updateTitleOfHeader();
+        }
     }
 
 })
