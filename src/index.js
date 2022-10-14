@@ -240,6 +240,7 @@ const newTaskPopup = document.querySelector('.task-popup-container');
 const tableTasksContainer = document.querySelector('.table-tasks-container');
 
 const taskDescriptionCollecter = document.querySelector('#task-description-collecter');
+const taskTitleCollecter = document.querySelector('#task-title-collecter');
 const dueDate = document.querySelector('#due-date');
 const importanceCheck = document.querySelector('#importance-check');
 
@@ -277,6 +278,9 @@ document.addEventListener('click', (element) => {
 
         getNewTaskTitle();
         Html.cleanInputValueOfNode(taskTitleCollecter)
+        Html.cleanInputValueOfNode(taskDescriptionCollecter);
+        Html.cleanInputValueOfNode(dueDate);
+        importanceCheck.checked = false;
         removeNewTaskPopup();
         addNewTaskToActiveProjectTasks();
         clearTableTasksContainer

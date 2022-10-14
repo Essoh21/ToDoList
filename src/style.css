@@ -556,14 +556,14 @@ input[type='checkbox']:checked~.checkmark-container::before {
 .task-popup-body-left {
     grid-area: taskPopupBodyLeft;
     background-color: var(--left-container-backgroud);
-    opacity: .6;
+    opacity: .8;
 }
 
 .task-popup-body-right {
     grid-area: taskPopupBodyRight;
     background-image: url('./images/back.jpg');
     background-size: cover;
-    opacity: .9;
+    opacity: .98;
     padding-top: .7rem;
     display: grid;
     grid-template-columns: 4fr 1fr;
