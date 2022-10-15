@@ -102,6 +102,18 @@ function updateTitleOfHeader() {
     tasksBodyContainerHeader.innerHTML = activeProjectTitle;
 }
 
+
+//*********************setting projects and tasks bounds */
+const projectsTasksNodesContainersContainer = [];
+const emptyTasksContainer = [];
+projectsTasksNodesContainersContainer.push(emptyTasksContainer);
+let activeProjectIndexFromAllProjects = 0;
+
+function getActiveProjectIndexFromAllProjects(activeProject) {
+
+    return allProjects.indexOf(activeProject);
+}
+
 //  application body 
 
 const tasksBodyContainer = document.querySelector('.tasksBodyContainer');
@@ -190,7 +202,9 @@ newProjectCancelButton.addEventListener('click', () => {
 newProjectAddButton.addEventListener('click', () => {
     getNewProjectTitle();
     if (!(newProjectTitle == '')) {
-        allProjects.push(createNewProjectWithTitle(newProjectTitle))
+        allProjects.push(createNewProjectWithTitle(newProjectTitle));
+        projectsTasksNodesContainersContainer.push(emptyTasksContainer);
+
     }
     removeNewProjectLine();
     removeNewProjectPopup();
@@ -208,7 +222,7 @@ Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksBodyContai
 
 //  collecting a new task information 
 
-const activeProjectTasks = [];
+let activeProjectTasks = [];
 
 
 let newTaskTitle = '';
@@ -302,9 +316,10 @@ document.addEventListener('click', (element) => {
         importanceCheck.checked = false;
         removeNewTaskPopup();
         addNewTaskToActiveProjectTasks();
-        clearTableTasksContainer
+        clearTableTasksContainer;
+        activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
         displayActiveProjectTasks();
-        ;
+
 
     }
 
@@ -313,11 +328,22 @@ document.addEventListener('click', (element) => {
             changeActiveProjectNodeTo(element.target);
             updateActiveProjectTitle();
             updateTitleOfHeader();
+            activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target);
+            activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
+            clearTableTasksContainer();
+            displayActiveProjectTasks();
+
         } else {
             changeActiveProjectNodeTo(element.target.parentNode);
             updateActiveProjectTitle();
             updateTitleOfHeader();
+            activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.parentNode);
+            activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
+            clearTableTasksContainer();
+            displayActiveProjectTasks();
+
         }
+
     }
 
 })
@@ -336,17 +362,14 @@ function clearTableTasksContainer() {
     tableTasksContainer.innerHTML = '';
 }
 
-
-function removeItemOfIndexFromArray(itemIndex, arrayToUse) {
-    arrayToUse.splice(itemIndex, 1);
-}
-
 function removeParentOfTrashIconNodeFromActiveProjectTasks(trashIconNode) {
     const trashIconParentNode = trashIconNode.parentNode.parentNode;
     const trashIconParentNodeIndex = activeProjectTasks.indexOf(trashIconParentNode);
     activeProjectTasks.splice(trashIconParentNodeIndex, 1);
 
 }
+
+
 
 
 
