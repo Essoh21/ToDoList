@@ -10,9 +10,35 @@ const IMPORTANT_TASKS_TITLE = 'Important tasks';
 const NEWT_WEEK_TASKS_TITLE = 'Next Week tasks';
 const NEW_PROJECT_LINE_TITLE = 'Add new project';
 
+const allProjects = [];
+
+const projectsTasksNodesContainersContainer = [];
+const emptyTasksContainer = [];
+const homeProjectTitle = 'Home Project';
+const homeProject = createNewProjectWithTitle(homeProjectTitle)
+//add homeProject and homeProject tasks container 
+
+allProjects.push(homeProject);
+projectsTasksNodesContainersContainer.push(emptyTasksContainer);
+
+let activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProject);
+
+let activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
+let newTaskTitle = '';
+const projectsContainer = document.querySelector('.projectsContainer');
+
+
+
+
 // Application Header 
 const appheader = document.querySelector('.header');
 appheader.appendChild(appLogo);
+
+
+
+// variable that collect newProject Title 
+
+let newProjectTitle = '';
 
 
 // Application dashboard 
@@ -22,7 +48,6 @@ const scheduleContainer = document.querySelector('.scheduleContainer');
 Shedule.sheduleContainersNodes.forEach((scheduleContainerNode) => {
     Html.appendHtmlChildNodeToParentNode(scheduleContainerNode, scheduleContainer);
 });
-
 
 const todayTasksHeaderContainer = document.querySelector('.today.tasks-header');
 const importantTasksHeaderContainer = document.querySelector('.important.tasks-header');
@@ -56,18 +81,8 @@ Html.useTextAsInnerHtmlOfNode(NEWT_WEEK_TASKS_TITLE, nextWeekTasksHeaderTitleCon
 // dashboard Project part 
 
 
-const projectsContainer = document.querySelector('.projectsContainer');
+
 Html.appendHtmlChildNodeToParentNode(Shedule.newProjectPopup, projectsContainer);
-
-// all projects collecter 
-
-const allProjects = [];
-const homeProjectTitle = 'Home Project';
-const homeProject = createNewProjectWithTitle(homeProjectTitle)
-allProjects.push(homeProject);
-
-
-
 
 // The line to click to  display popup to add a new project Title
 const newProjectLineItems = [Shedule.newProjectLeftIconContainer,
@@ -104,10 +119,9 @@ function updateTitleOfHeader() {
 
 
 //*********************setting projects and tasks bounds */
-const projectsTasksNodesContainersContainer = [];
-const emptyTasksContainer = [];
-projectsTasksNodesContainersContainer.push(emptyTasksContainer);
-let activeProjectIndexFromAllProjects = 0;
+
+
+
 
 function getActiveProjectIndexFromAllProjects(activeProject) {
 
@@ -130,17 +144,12 @@ tasksBodyContainerItems.forEach((item) => {
 
 
 // Handling Events
-
 // nodes to look 
 const newProjectPopupNode = document.querySelector('.new-project-popup');
 const newProjectLine = document.querySelector('.new-project-line');
 const newProjectAddButton = document.querySelector('.new-project.add-button');
 const newProjectCancelButton = document.querySelector('.new-project.cancel-button');
 const newProjectTitleCollecter = document.querySelector('.new-project-title-collecter');
-
-// variable that collect newProject Title 
-
-let newProjectTitle = '';
 
 // useful functions 
 
@@ -192,6 +201,7 @@ function getNewProjectTitle() {
 }
 
 // Event listeners
+
 // new project Events 
 newProjectLine.addEventListener('click', replaceNewProjectLIneByNewProjectPopup);
 
@@ -199,12 +209,13 @@ newProjectCancelButton.addEventListener('click', () => {
     replaceNewProjectPopupWithNewProjectLine();
     Html.cleanInputValueOfNode(newProjectTitleCollecter);
 });
+
+
 newProjectAddButton.addEventListener('click', () => {
     getNewProjectTitle();
     if (!(newProjectTitle == '')) {
         allProjects.push(createNewProjectWithTitle(newProjectTitle));
-        projectsTasksNodesContainersContainer.push(emptyTasksContainer);
-
+        projectsTasksNodesContainersContainer.push([]);
     }
     removeNewProjectLine();
     removeNewProjectPopup();
@@ -222,10 +233,16 @@ Html.appendHtmlChildNodeToParentNode(Shedule.taskPopupContainer, tasksBodyContai
 
 //  collecting a new task information 
 
-let activeProjectTasks = [];
+//Nodes to look 
 
+const newTaskLine = document.querySelector('.new-task-line');
+const newTaskPopup = document.querySelector('.task-popup-container');
+const tableTasksContainer = document.querySelector('.table-tasks-container');
 
-let newTaskTitle = '';
+const taskDescriptionCollecter = document.querySelector('#task-description-collecter');
+const taskTitleCollecter = document.querySelector('#task-title-collecter');
+const dueDate = document.querySelector('#due-date');
+const importanceCheck = document.querySelector('#importance-check');
 
 //usefull functions 
 function addNewTaskToActiveProjectTasks() {
@@ -266,19 +283,6 @@ function getNewTaskTitle() {
     newTaskTitle = taskTitleCollecter.value;
 }
 
-//Nodes to look 
-
-const newTaskLine = document.querySelector('.new-task-line');
-const newTaskPopup = document.querySelector('.task-popup-container');
-const tableTasksContainer = document.querySelector('.table-tasks-container');
-
-const taskDescriptionCollecter = document.querySelector('#task-description-collecter');
-const taskTitleCollecter = document.querySelector('#task-title-collecter');
-const dueDate = document.querySelector('#due-date');
-const importanceCheck = document.querySelector('#importance-check');
-
-
-
 
 // new task Popup EventListeners
 
@@ -315,9 +319,10 @@ document.addEventListener('click', (element) => {
         Html.cleanInputValueOfNode(dueDate);
         importanceCheck.checked = false;
         removeNewTaskPopup();
+
         addNewTaskToActiveProjectTasks();
-        clearTableTasksContainer;
-        activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
+
+        clearTableTasksContainer();
         displayActiveProjectTasks();
 
 
@@ -325,22 +330,25 @@ document.addEventListener('click', (element) => {
 
     if (element.target.matches('.new-project-container') || element.target.parentNode.matches('.new-project-container')) {
         if (element.target.matches('.new-project-container')) {
+            clearTableTasksContainer();
             changeActiveProjectNodeTo(element.target);
             updateActiveProjectTitle();
             updateTitleOfHeader();
             activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target);
-            activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             clearTableTasksContainer();
+            activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             displayActiveProjectTasks();
+
 
         } else {
             changeActiveProjectNodeTo(element.target.parentNode);
             updateActiveProjectTitle();
             updateTitleOfHeader();
             activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.parentNode);
-            activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             clearTableTasksContainer();
+            activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             displayActiveProjectTasks();
+
 
         }
 

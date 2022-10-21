@@ -75,6 +75,7 @@ body {
     width: 40vw;
     background-color: var(--left-container-backgroud);
     height: calc(100vh - 6rem);
+    overflow: auto;
     font-family: var(--left-side-font);
 }
 
@@ -116,7 +117,7 @@ body {
 
 .scheduleContainer {
     margin-top: 1rem;
-    min-height: 100%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
