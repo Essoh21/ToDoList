@@ -25,6 +25,7 @@ let activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(hom
 
 let activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
 let newTaskTitle = '';
+let newTaskDueDate = 'no date';
 const projectsContainer = document.querySelector('.projectsContainer');
 
 
@@ -252,7 +253,7 @@ const importanceCheck = document.querySelector('#importance-check');
 
 //usefull functions 
 function addNewTaskToActiveProjectTasks() {
-    activeProjectTasks.push(createNewTaskWithTitle(newTaskTitle))
+    activeProjectTasks.push(createNewTaskWithTitleAndDueDate(newTaskTitle, newTaskDueDate));
 }
 
 function displayActiveProjectTasks() {
@@ -277,9 +278,10 @@ function displayNewTaskPopup() {
     Html.displayNodeAsGrid(newTaskPopup);
 }
 
-function createNewTaskWithTitle(currentTaskTitle) {
+function createNewTaskWithTitleAndDueDate(currentTaskTitle, currenTaskDueDate) {
     const newTaskElement = new Shedule.Task();
     newTaskElement.taskTitle = currentTaskTitle;
+    newTaskElement.dueDate = currenTaskDueDate;
     const newTask = newTaskElement.createNewTask();
     return newTask;
 }
@@ -289,6 +291,14 @@ function getNewTaskTitle() {
     newTaskTitle = taskTitleCollecter.value;
 }
 
+function getNewTaskDueDate() {
+    const taskDueDateCollecter = document.querySelector('#due-date');
+    newTaskDueDate = taskDueDateCollecter.value;
+}
+
+function initializeNewTaskDueDateValue() {
+    newTaskDueDate = 'no date';
+}
 // styling functions 
 
 function changeOpacityOfNodeTo(opacityValue, targetNode) {
@@ -330,6 +340,9 @@ document.addEventListener('click', (element) => {
 
     if (element.target.matches('.add-task')) {
         getNewTaskTitle();
+        if (!(dueDate.value == '')) {
+            getNewTaskDueDate();
+        }
         if (!(taskTitleCollecter.value == '')) {
             displayNewTaskLine();
             Html.cleanInputValueOfNode(taskTitleCollecter)
@@ -342,6 +355,7 @@ document.addEventListener('click', (element) => {
 
             clearTableTasksContainer();
             displayActiveProjectTasks();
+            initializeNewTaskDueDateValue();
 
         } else {
             alert('The task\'s title can not be empty');
