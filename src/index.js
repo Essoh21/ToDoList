@@ -329,20 +329,24 @@ document.addEventListener('click', (element) => {
     }
 
     if (element.target.matches('.add-task')) {
-
-        displayNewTaskLine();
-
         getNewTaskTitle();
-        Html.cleanInputValueOfNode(taskTitleCollecter)
-        Html.cleanInputValueOfNode(taskDescriptionCollecter);
-        Html.cleanInputValueOfNode(dueDate);
-        importanceCheck.checked = false;
-        removeNewTaskPopup();
+        if (!(taskTitleCollecter.value == '')) {
+            displayNewTaskLine();
+            Html.cleanInputValueOfNode(taskTitleCollecter)
+            Html.cleanInputValueOfNode(taskDescriptionCollecter);
+            Html.cleanInputValueOfNode(dueDate);
+            importanceCheck.checked = false;
+            removeNewTaskPopup();
 
-        addNewTaskToActiveProjectTasks();
+            addNewTaskToActiveProjectTasks();
 
-        clearTableTasksContainer();
-        displayActiveProjectTasks();
+            clearTableTasksContainer();
+            displayActiveProjectTasks();
+
+        } else {
+            alert('The task\'s title can not be empty');
+            return;
+        }
 
 
     }
