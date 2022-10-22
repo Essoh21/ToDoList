@@ -28,6 +28,12 @@ let newTaskTitle = '';
 const projectsContainer = document.querySelector('.projectsContainer');
 
 
+const opacityValue = .5;
+
+setBackGroundColorToNode('red', homeProject);
+changeOpacityOfNodeTo(opacityValue, homeProject);
+
+
 
 
 // Application Header 
@@ -283,6 +289,19 @@ function getNewTaskTitle() {
     newTaskTitle = taskTitleCollecter.value;
 }
 
+// styling functions 
+
+function changeOpacityOfNodeTo(opacityValue, targetNode) {
+    targetNode.style.opacity = opacityValue;
+}
+
+function setBackGroundColorToNode(backGroundColor, targetNode) {
+    targetNode.style.backgroundColor = `${backGroundColor}`;
+}
+
+function removeBackgroundColorOfNode(targetNode) {
+    targetNode.style.backgroundColor = '';
+}
 
 // new task Popup EventListeners
 
@@ -331,7 +350,14 @@ document.addEventListener('click', (element) => {
     if (element.target.matches('.new-project-container') || element.target.parentNode.matches('.new-project-container')) {
         if (element.target.matches('.new-project-container')) {
             clearTableTasksContainer();
+
+            removeBackgroundColorOfNode(activeProjectNode);
+            changeOpacityOfNodeTo(1, activeProjectNode);
+
             changeActiveProjectNodeTo(element.target);
+            setBackGroundColorToNode('green', activeProjectNode);
+            changeOpacityOfNodeTo(opacityValue, activeProjectNode);
+
             updateActiveProjectTitle();
             updateTitleOfHeader();
             activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target);
@@ -341,7 +367,12 @@ document.addEventListener('click', (element) => {
 
 
         } else {
+            removeBackgroundColorOfNode(activeProjectNode);
+            changeOpacityOfNodeTo(1, activeProjectNode);
+
             changeActiveProjectNodeTo(element.target.parentNode);
+            setBackGroundColorToNode('green', activeProjectNode);
+            changeOpacityOfNodeTo(opacityValue, activeProjectNode);
             updateActiveProjectTitle();
             updateTitleOfHeader();
             activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.parentNode);
