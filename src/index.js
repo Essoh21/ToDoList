@@ -5,6 +5,7 @@ import * as Html from "./htmlGenerator.js";
 import Icons from "./icons";
 
 import isToday from "date-fns/isToday";
+import getWeekOfMonth from "date-fns/getWeekOfMonth";
 
 
 const TODAY_TASKS_TITLE = 'Today tasks';
@@ -14,6 +15,7 @@ const NEW_PROJECT_LINE_TITLE = 'Add new project';
 
 const allProjects = [];
 let todayTasks = [];
+let nextWeekTasks = [];
 
 const projectsTasksNodesContainersContainer = [];
 const emptyTasksContainer = [];
@@ -313,14 +315,34 @@ function collectTodayTasks() {
     })
 }
 
+function collectNextWeekTasks() {
+    projectsTasksNodesContainersContainer.forEach((tasksNodesContainer) => {
+        tasksNodesContainer.forEach((taskNode) => {
+            if (getWeekOfMonth(new Date(`${taskNode.childNodes[2].innerHTML}`), { weekStartsOn: 1 }) == (getWeekOfMonth(new Date(), { weekStartsOn: 1 }) + 1)) {
+                nextWeekTasks.push(taskNode);
+            }
+        })
+    })
+}
+
 function displayTodayTasks() {
     todayTasks.slice().reverse().forEach((task) => {
         Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
     })
 }
 
+function displayNextWeekTasks() {
+    nextWeekTasks.slice().reverse().forEach((task) => {
+        Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
+    })
+}
+
 function clearTodayTasksContainer() {
     todayTasks = [];
+}
+
+function clearNextWeekTasksContainer() {
+    nextWeekTasks = [];
 }
 // styling functions 
 
@@ -373,6 +395,7 @@ document.addEventListener('click', (element) => {
             updateTitleOfHeader();
 
             displayTodayTasks();
+            removeNewTaskLine();
             clearTodayTasksContainer();
         } else {
             collectTodayTasks();
@@ -389,10 +412,54 @@ document.addEventListener('click', (element) => {
             updateTitleOfHeader();
 
             displayTodayTasks();
+            removeNewTaskLine();
             clearTodayTasksContainer();
         }
 
     }
+
+
+    if (element.target.matches('.next-week.tasks-header') || element.target.parentNode.matches('.next-week.tasks-header')) {
+
+        if (element.target.matches('.next-week.tasks-header')) {
+            collectNextWeekTasks();
+            clearTableTasksContainer();
+
+            removeBackgroundColorOfNode(activeProjectNode);
+            changeOpacityOfNodeTo(1, activeProjectNode);
+
+            changeActiveProjectNodeTo(element.target);
+            setBackGroundColorToNode('green', activeProjectNode);
+            changeOpacityOfNodeTo(opacityValue, activeProjectNode);
+
+            updateActiveProjectTitle();
+            updateTitleOfHeader();
+
+            displayNextWeekTasks();
+            removeNewTaskLine();
+            clearNextWeekTasksContainer();
+        } else {
+            collectNextWeekTasks();
+            clearTableTasksContainer();
+
+            removeBackgroundColorOfNode(activeProjectNode);
+            changeOpacityOfNodeTo(1, activeProjectNode);
+
+            changeActiveProjectNodeTo(element.target.parentNode);
+            setBackGroundColorToNode('green', activeProjectNode);
+            changeOpacityOfNodeTo(opacityValue, activeProjectNode);
+
+            updateActiveProjectTitle();
+            updateTitleOfHeader();
+
+            displayNextWeekTasks();
+            removeNewTaskLine();
+            clearNextWeekTasksContainer();
+        }
+
+    }
+
+
 
     if (element.target.matches('.close-icon')) {
         removeNewTaskPopup();
@@ -444,6 +511,7 @@ document.addEventListener('click', (element) => {
             clearTableTasksContainer();
             activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             displayActiveProjectTasks();
+            displayNewTaskLine();
 
 
         } else {
@@ -459,6 +527,7 @@ document.addEventListener('click', (element) => {
             clearTableTasksContainer();
             activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             displayActiveProjectTasks();
+            displayNewTaskLine();
 
 
         }
