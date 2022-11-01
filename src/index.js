@@ -4,6 +4,8 @@ import * as Shedule from "./itemsToDisplay.js";
 import * as Html from "./htmlGenerator.js";
 import Icons from "./icons";
 
+import isToday from "date-fns/isToday";
+
 
 const TODAY_TASKS_TITLE = 'Today tasks';
 const IMPORTANT_TASKS_TITLE = 'Important tasks';
@@ -11,6 +13,7 @@ const NEWT_WEEK_TASKS_TITLE = 'Next Week tasks';
 const NEW_PROJECT_LINE_TITLE = 'Add new project';
 
 const allProjects = [];
+let todayTasks = [];
 
 const projectsTasksNodesContainersContainer = [];
 const emptyTasksContainer = [];
@@ -299,6 +302,26 @@ function getNewTaskDueDate() {
 function initializeNewTaskDueDateValue() {
     newTaskDueDate = 'no date';
 }
+
+function collectTodayTasks() {
+    projectsTasksNodesContainersContainer.forEach((tasksNodesContainer) => {
+        tasksNodesContainer.forEach((taskNode) => {
+            if (isToday(new Date(`${taskNode.childNodes[2].innerHTML}`))) {
+                todayTasks.push(taskNode);
+            }
+        })
+    })
+}
+
+function displayTodayTasks() {
+    todayTasks.slice().reverse().forEach((task) => {
+        Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
+    })
+}
+
+function clearTodayTasksContainer() {
+    todayTasks = [];
+}
 // styling functions 
 
 function changeOpacityOfNodeTo(opacityValue, targetNode) {
@@ -333,6 +356,44 @@ document.addEventListener('click', (element) => {
 
     }
 
+    if (element.target.matches('.today.tasks-header') || element.target.parentNode.matches('.today.tasks-header')) {
+
+        if (element.target.matches('.today.tasks-header')) {
+            collectTodayTasks();
+            clearTableTasksContainer();
+
+            removeBackgroundColorOfNode(activeProjectNode);
+            changeOpacityOfNodeTo(1, activeProjectNode);
+
+            changeActiveProjectNodeTo(element.target);
+            setBackGroundColorToNode('green', activeProjectNode);
+            changeOpacityOfNodeTo(opacityValue, activeProjectNode);
+
+            updateActiveProjectTitle();
+            updateTitleOfHeader();
+
+            displayTodayTasks();
+            clearTodayTasksContainer();
+        } else {
+            collectTodayTasks();
+            clearTableTasksContainer();
+
+            removeBackgroundColorOfNode(activeProjectNode);
+            changeOpacityOfNodeTo(1, activeProjectNode);
+
+            changeActiveProjectNodeTo(element.target.parentNode);
+            setBackGroundColorToNode('green', activeProjectNode);
+            changeOpacityOfNodeTo(opacityValue, activeProjectNode);
+
+            updateActiveProjectTitle();
+            updateTitleOfHeader();
+
+            displayTodayTasks();
+            clearTodayTasksContainer();
+        }
+
+    }
+
     if (element.target.matches('.close-icon')) {
         removeNewTaskPopup();
         displayNewTaskLine();
@@ -355,6 +416,7 @@ document.addEventListener('click', (element) => {
 
             clearTableTasksContainer();
             displayActiveProjectTasks();
+
             initializeNewTaskDueDateValue();
 
         } else {

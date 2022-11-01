@@ -129,13 +129,28 @@ body {
 
 .tasks-header {
     color: var(--left-litle-titles-color);
-    font-weight: bold;
+    margin-top: .5rem;
+    padding-left: var(--left-side-padding);
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    gap: 1rem;
-    font-weight: var(--titles-font-weight);
+    align-items: center;
+    justify-content: space-between;
     cursor: pointer;
+}
+
+.tasks-header:hover {
+
+    background-color: var(--header-background-color);
+    border-radius: .2rem;
+    opacity: .6;
+}
+
+.tasks-header:active {
+    opacity: .8;
+}
+
+.today.tasks-header {
+    padding: .4rem;
 }
 
 .header-title {
