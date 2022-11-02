@@ -6,6 +6,7 @@ import Icons from "./icons";
 
 import isToday from "date-fns/isToday";
 import getWeekOfMonth from "date-fns/getWeekOfMonth";
+import * as Storage from "./UserData";
 
 
 const TODAY_TASKS_TITLE = 'Today tasks';
@@ -324,7 +325,20 @@ function collectNextWeekTasks() {
         })
     })
 }
+/*
+function updateAllTasks() {
+   clearAllTasks();
+   projectsTasksNodesContainersContainer.forEach((projectTasksNode) => {
+       projectTasksNode.forEach((task) => {
+           allTasks.push(task);
+       })
+   })
+}
 
+function clearAllTasks() {
+   allTasks = [];
+}
+*/
 function displayTodayTasks() {
     todayTasks.slice().reverse().forEach((task) => {
         Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
