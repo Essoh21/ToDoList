@@ -11,18 +11,18 @@ function getUserStoredDataFromHisLocalStorageAsObject() {
 
 function storeUserAllProjectsToHisLocalStorage(userAllProjects) {
 
-    const allStoredProjects = userAllProjects;
-    localStorage.setItem("allStoredProjects", `${allStoredProjects}`)
+    let allProjectsToStore = JSON.stringify(userAllProjects);
+    localStorage.setItem("allStoredProjects", allProjectsToStore)
 
 }
 
 
-function storeAllTasksNodesContainerContainerToLocalStorage(userAllTasksNodesContainerContainer) {
-    const allStoredTasksNodesContainersContainer = userAllTasksNodesContainerContainer;
-    localStorage.setItem("allStoredTasksNodesContainersContainer", `${allStoredTasksNodesContainersContainer}`);
+function storeAllTasksNodesContainersContainerToLocalStorage(userAllTasksNodesContainerContainer) {
+    const allTasksNodesContainersContainerToStore = JSON.stringify(userAllTasksNodesContainerContainer);
+    localStorage.setItem("allStoredTasksNodesContainersContainer", allTasksNodesContainersContainerToStore);
 }
 
 export {
-    getUserStoredDataFromHisLocalStorageAsObject, storeAllTasksNodesContainerContainerToLocalStorage,
+    getUserStoredDataFromHisLocalStorageAsObject, storeAllTasksNodesContainersContainerToLocalStorage,
     storeUserAllProjectsToHisLocalStorage
 }

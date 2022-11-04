@@ -14,18 +14,34 @@ const IMPORTANT_TASKS_TITLE = 'Important tasks';
 const NEWT_WEEK_TASKS_TITLE = 'Next Week tasks';
 const NEW_PROJECT_LINE_TITLE = 'Add new project';
 
-const allProjects = [];
+let allProjects = [];
 let todayTasks = [];
 let nextWeekTasks = [];
 
-const projectsTasksNodesContainersContainer = [];
+let projectsTasksNodesContainersContainer = [];
 const emptyTasksContainer = [];
 const homeProjectTitle = 'Home Project';
 const homeProject = createNewProjectWithTitle(homeProjectTitle)
 //add homeProject and homeProject tasks container 
 
-allProjects.push(homeProject);
-projectsTasksNodesContainersContainer.push(emptyTasksContainer);
+
+// a function to load user localStorage Data if any 
+
+function loadUserLocalStorageData() {
+    if (!(localStorage.getItem('allStoredProjects') == null)) {
+        let storedProjects = Storage.getUserStoredDataFromHisLocalStorageAsObject().ProjectsStored;
+        let StoredTasksNodesContainersContainer = Storage.getUserStoredDataFromHisLocalStorageAsObject().tasksNodesContainerscontainerStored;
+        allProjects = [...storedProjects];
+        projectsTasksNodesContainersContainer = [...StoredTasksNodesContainersContainer];
+
+    } else {
+        allProjects.push(homeProject);
+        projectsTasksNodesContainersContainer.push(emptyTasksContainer);
+
+    }
+}
+
+window.addEventListener('load', loadUserLocalStorageData);
 
 let activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProject);
 
@@ -110,7 +126,7 @@ newProjectLineItems.forEach((item) => {
 
 Html.useTextAsInnerHtmlOfNode(NEW_PROJECT_LINE_TITLE, Shedule.newProjectLineTitleContainer);
 Html.appendHtmlChildNodeToParentNode(Shedule.newProjectLine, projectsContainer);
-dispalayAllProjects();
+displayAllProjects();
 
 //************** handling projects Selection  */
 
@@ -195,7 +211,7 @@ function removeNewProjectLine() {
 
 // new projects handlers
 
-function dispalayAllProjects() {
+function displayAllProjects() {
     allProjects.slice().reverse().forEach((project) => {
         Html.appendHtmlChildNodeToParentNode(project, projectsContainer);
     })
@@ -229,10 +245,12 @@ newProjectAddButton.addEventListener('click', () => {
     if (!(newProjectTitle == '')) {
         allProjects.push(createNewProjectWithTitle(newProjectTitle));
         projectsTasksNodesContainersContainer.push([]);
+        Storage.storeUserAllProjectsToHisLocalStorage(allProjects);
+        Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
     }
     removeNewProjectLine();
     removeNewProjectPopup();
-    dispalayAllProjects();
+    displayAllProjects();
     Html.cleanInputValueOfNode(newProjectTitleCollecter);
     displayNewProjectLine();
 
@@ -494,6 +512,8 @@ document.addEventListener('click', (element) => {
             removeNewTaskPopup();
 
             addNewTaskToActiveProjectTasks();
+
+            Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
 
             clearTableTasksContainer();
             displayActiveProjectTasks();
