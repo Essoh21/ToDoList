@@ -35,6 +35,9 @@ function loadUserLocalStorageData() {
         let StoredTasksNodesContainersContainer = Storage.getUserStoredDataFromHisLocalStorageAsObject().tasksNodesContainerscontainerStored;
         allProjects = [...storedProjects];
         projectsTasksNodesContainersContainer = [...StoredTasksNodesContainersContainer];
+
+        activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProjectToStore);
+
         clearProjectsFromDisplay();
         displayAllProjects();
 
@@ -44,6 +47,9 @@ function loadUserLocalStorageData() {
     } else {
         allProjects.push(homeProjectToStore);
         projectsTasksNodesContainersContainer.push(emptyTasksContainer);
+        activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProjectToStore);
+
+
         clearProjectsFromDisplay();
         displayAllProjects();
         setBackGroundColorToNode('red', homeProject);
@@ -55,7 +61,7 @@ function loadUserLocalStorageData() {
 // necessary  component after load 
 window.addEventListener('load', loadUserLocalStorageData);
 
-let activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProjectToStore);
+let activeProjectIndexFromAllProjects;
 
 let activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
 let newTaskTitle = '';
@@ -156,7 +162,7 @@ function updateTitleOfHeader() {
 
 function getActiveProjectIndexFromAllProjects(activeProject) {
 
-    return allProjects.indexOf(activeProject.outerHTML);
+    return allProjects.indexOf(activeProject);
 }
 
 //  application body 
@@ -274,7 +280,6 @@ newProjectAddButton.addEventListener('click', () => {
         projectsTasksNodesContainersContainer.push([]);
         Storage.storeUserAllProjectsToHisLocalStorage(allProjects);
         Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
-
     }
     removeNewProjectLine();
     removeNewProjectPopup();
@@ -306,12 +311,12 @@ const importanceCheck = document.querySelector('#importance-check');
 
 //usefull functions 
 function addNewTaskToActiveProjectTasks() {
-    activeProjectTasks.push(createNewTaskWithTitleAndDueDate(newTaskTitle, newTaskDueDate));
+    activeProjectTasks.push(createNewTaskWithTitleAndDueDate(newTaskTitle, newTaskDueDate).outerHTML);
 }
 
 function displayActiveProjectTasks() {
     activeProjectTasks.slice().reverse().forEach((task) => {
-        Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
+        tableTasksContainer.innerHTML += task;
     })
 }
 
@@ -565,16 +570,20 @@ document.addEventListener('click', (element) => {
             changeOpacityOfNodeTo(1, activeProjectNode);
 
             changeActiveProjectNodeTo(element.target);
+            activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.outerHTML);
+            console.log(activeProjectIndexFromAllProjects); ///////////////////////// remove this 
             setBackGroundColorToNode('green', activeProjectNode);
             changeOpacityOfNodeTo(opacityValue, activeProjectNode);
 
             updateActiveProjectTitle();
             updateTitleOfHeader();
-            activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target);
+
             clearTableTasksContainer();
             activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
+
             displayActiveProjectTasks();
             displayNewTaskLine();
+
 
 
         } else {
@@ -582,11 +591,12 @@ document.addEventListener('click', (element) => {
             changeOpacityOfNodeTo(1, activeProjectNode);
 
             changeActiveProjectNodeTo(element.target.parentNode);
+            activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.parentNode.outerHTML);
             setBackGroundColorToNode('green', activeProjectNode);
             changeOpacityOfNodeTo(opacityValue, activeProjectNode);
             updateActiveProjectTitle();
             updateTitleOfHeader();
-            activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.parentNode);
+
             clearTableTasksContainer();
             activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
             displayActiveProjectTasks();
@@ -615,7 +625,7 @@ function clearTableTasksContainer() {
 
 function removeParentOfTrashIconNodeFromActiveProjectTasks(trashIconNode) {
     const trashIconParentNode = trashIconNode.parentNode.parentNode;
-    const trashIconParentNodeIndex = activeProjectTasks.indexOf(trashIconParentNode);
+    const trashIconParentNodeIndex = activeProjectTasks.indexOf(trashIconParentNode.outerHTML);
     activeProjectTasks.splice(trashIconParentNodeIndex, 1);
 
 }
