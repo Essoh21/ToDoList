@@ -22,6 +22,9 @@ let projectsTasksNodesContainersContainer = [];
 const emptyTasksContainer = [];
 const homeProjectTitle = 'Home Project';
 const homeProject = createNewProjectWithTitle(homeProjectTitle);
+removeBackgroundColorOfNode(homeProject);
+changeOpacityOfNodeTo(1, homeProject);
+
 let homeProjectToStore = homeProject.outerHTML
 //add homeProject and homeProject tasks container 
 
@@ -43,6 +46,8 @@ function loadUserLocalStorageData() {
 
         setBackGroundColorToNode('red', homeProject);
         changeOpacityOfNodeTo(opacityValue, homeProject);
+
+
 
     } else {
         allProjects.push(homeProjectToStore);
@@ -276,7 +281,10 @@ newProjectCancelButton.addEventListener('click', () => {
 newProjectAddButton.addEventListener('click', () => {
     getNewProjectTitle();
     if (!(newProjectTitle == '')) {
-        allProjects.push(createNewProjectWithTitle(newProjectTitle).outerHTML);
+        const anotherProject = createNewProjectWithTitle(newProjectTitle)
+        removeBackgroundColorOfNode(anotherProject);
+        changeOpacityOfNodeTo(1, anotherProject);
+        allProjects.push(anotherProject.outerHTML);
         projectsTasksNodesContainersContainer.push([]);
         Storage.storeUserAllProjectsToHisLocalStorage(allProjects);
         Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
@@ -440,6 +448,8 @@ document.addEventListener('click', (element) => {
         if (confirmation) {
             deleteParentOfTrashIconNodeFromTableTaskscontainer(element.target);
             removeParentOfTrashIconNodeFromActiveProjectTasks(element.target);
+
+            Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
         }
 
     }
@@ -570,8 +580,9 @@ document.addEventListener('click', (element) => {
             changeOpacityOfNodeTo(1, activeProjectNode);
 
             changeActiveProjectNodeTo(element.target);
+
             activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(element.target.outerHTML);
-            console.log(activeProjectIndexFromAllProjects); ///////////////////////// remove this 
+
             setBackGroundColorToNode('green', activeProjectNode);
             changeOpacityOfNodeTo(opacityValue, activeProjectNode);
 
@@ -587,6 +598,7 @@ document.addEventListener('click', (element) => {
 
 
         } else {
+
             removeBackgroundColorOfNode(activeProjectNode);
             changeOpacityOfNodeTo(1, activeProjectNode);
 
@@ -616,7 +628,14 @@ document.addEventListener('click', (element) => {
 // useful functions 
 
 function deleteParentOfTrashIconNodeFromTableTaskscontainer(trashIconNode) {
-    trashIconNode.parentNode.parentNode.removeChild(trashIconNode.parentNode);
+    const trashIconNodeParentOuterHTML = trashIconNode.parentNode.outerHTML;
+    if (tableTasksContainer.innerHTML.includes(trashIconNodeParentOuterHTML)) {
+        tableTasksContainer.innerHTML = tableTasksContainer.innerHTML.replace(trashIconNodeParentOuterHTML, '');
+    } else {
+        return;
+    }
+
+    // trashIconNode.parentNode.parentNode.removeChild(trashIconNode.parentNode);
 }
 
 function clearTableTasksContainer() {
@@ -624,7 +643,7 @@ function clearTableTasksContainer() {
 }
 
 function removeParentOfTrashIconNodeFromActiveProjectTasks(trashIconNode) {
-    const trashIconParentNode = trashIconNode.parentNode.parentNode;
+    const trashIconParentNode = trashIconNode.parentNode;
     const trashIconParentNodeIndex = activeProjectTasks.indexOf(trashIconParentNode.outerHTML);
     activeProjectTasks.splice(trashIconParentNodeIndex, 1);
 
