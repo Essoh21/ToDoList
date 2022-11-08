@@ -369,8 +369,14 @@ function initializeNewTaskDueDateValue() {
 function collectTodayTasks() {
     projectsTasksNodesContainersContainer.forEach((tasksNodesContainer) => {
         tasksNodesContainer.forEach((taskNode) => {
-            if (isToday(new Date(`${taskNode.childNodes[2].innerHTML}`))) {
-                todayTasks.push(taskNode);
+            const duedateContainerAndDate = /(duedate-container">).*(<\/div><d)/;
+            const taskNodeDate = taskNode.match(duedateContainerAndDate)[0].slice(19, -8);
+
+            if (!(taskNodeDate.includes('no date'))) {
+                if (isToday(new Date(`${taskNodeDate}`))) {
+                    todayTasks.push(taskNode);
+                }
+
             }
         })
     })
@@ -379,8 +385,12 @@ function collectTodayTasks() {
 function collectNextWeekTasks() {
     projectsTasksNodesContainersContainer.forEach((tasksNodesContainer) => {
         tasksNodesContainer.forEach((taskNode) => {
-            if (getWeekOfMonth(new Date(`${taskNode.childNodes[2].innerHTML}`), { weekStartsOn: 1 }) == (getWeekOfMonth(new Date(), { weekStartsOn: 1 }) + 1)) {
-                nextWeekTasks.push(taskNode);
+            const duedateContainerAndDate = /(duedate-container">).*(<\/div><d)/;
+            const taskNodeDate = taskNode.match(duedateContainerAndDate)[0].slice(19, -8);
+            if (!(taskNodeDate.includes('no date'))) {
+                if (getWeekOfMonth(new Date(`${taskNodeDate}`), { weekStartsOn: 1 }) == (getWeekOfMonth(new Date(), { weekStartsOn: 1 }) + 1)) {
+                    nextWeekTasks.push(taskNode);
+                }
             }
         })
     })
@@ -401,13 +411,13 @@ function clearAllTasks() {
 */
 function displayTodayTasks() {
     todayTasks.slice().reverse().forEach((task) => {
-        Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
+        tableTasksContainer.innerHTML += task;
     })
 }
 
 function displayNextWeekTasks() {
     nextWeekTasks.slice().reverse().forEach((task) => {
-        Html.appendHtmlChildNodeToParentNode(task, tableTasksContainer);
+        tableTasksContainer.innerHTML += task;
     })
 }
 
@@ -458,6 +468,7 @@ document.addEventListener('click', (element) => {
 
         if (element.target.matches('.today.tasks-header')) {
             collectTodayTasks();
+
             clearTableTasksContainer();
 
             removeBackgroundColorOfNode(activeProjectNode);
@@ -543,6 +554,9 @@ document.addEventListener('click', (element) => {
     }
 
     if (element.target.matches('.add-task')) {
+
+
+
         getNewTaskTitle();
         if (!(dueDate.value == '')) {
             getNewTaskDueDate();
