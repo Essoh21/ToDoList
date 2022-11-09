@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
-    mode: "development",
+    mode: "production",
 
     entry: {
         main: path.resolve(__dirname, "src/index.js"),
@@ -19,6 +19,11 @@ module.exports = {
         static: path.resolve(__dirname, "dist"),
         open: true,
         hot: true
+    },
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     },
 
     // loaders 
