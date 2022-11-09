@@ -20,11 +20,7 @@ module.exports = {
         open: true,
         hot: true
     },
-    performance: {
-        hints: false,
-        maxEntrypointSize: 512000,
-        maxAssetSize: 512000
-    },
+
 
     // loaders 
     module: {
