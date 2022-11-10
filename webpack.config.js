@@ -15,18 +15,18 @@ module.exports = {
         filename: '[name].[contenthash].js',
         clean: true
     },
-    devServer: {
-        static: path.resolve(__dirname, "dist"),
-        open: true,
-        hot: true
-    },
-
+    /* devServer: {
+         static: path.resolve(__dirname, "dist"),
+         open: true,
+         hot: true
+     },*/
 
     // loaders 
     module: {
         rules: [
             {
-                test: /\.css$/i, use: ["style-loader", "css-loader"]
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.(svg|png|ico|jpg|jpeg|webp|gif|)$/i,

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1920"
+   height="1080"
+   viewBox="0 0 508 285.75001"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="bitmap.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="false"
+     showborder="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="cercle "
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <ellipse
+       style="opacity:0.84;fill:#93ac9d;stroke-width:0.264612"
+       id="path1944"
+       cx="204.0313"
+       cy="144.87555"
+       rx="50.175098"
+       ry="49.043655"
+       inkscape:label="first cercle " />
+    <g
+       inkscape:groupmode="layer"
+       id="layer2"
+       inkscape:label="cercle2"
+       transform="matrix(0,-0.94641434,1,0,62.029115,338.06431)"
+       style="display:inline;opacity:0.23">
+      <path
+         style="display:inline;opacity:1;fill:#000080;stroke-width:0.18726"
+         id="path2003"
+         sodipodi:type="arc"
+         sodipodi:cx="204.12704"
+         sodipodi:cy="143.40965"
+         sodipodi:rx="43.691063"
+         sodipodi:ry="39.54327"
+         sodipodi:start="0"
+         sodipodi:end="6.2719096"
+         sodipodi:arc-type="slice"
+         d="m 247.81811,143.40965 a 43.691063,39.54327 0 0 1 -43.5679,39.54312 43.691063,39.54327 0 0 1 -43.81353,-39.32018 43.691063,39.54327 0 0 1 43.32088,-39.76479 43.691063,39.54327 0 0 1 44.05777,39.09598 l -43.68829,0.44587 z"
+         inkscape:label="second Cercle " />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:23.2082px;font-family:'Roboto Condensed';-inkscape-font-specification:'Roboto Condensed,  Bold';opacity:0.23;fill:#dbe3e2;stroke-width:0.271971"
+         x="115.55298"
+         y="-189.37933"
+         id="text2063"
+         transform="matrix(0,0.97283826,-1.0279201,0,0,0)"
+         inkscape:label="to do "><tspan
+           sodipodi:role="line"
+           id="tspan2061"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:23.2082px;font-family:'Roboto Condensed';-inkscape-font-specification:'Roboto Condensed,  Bold';opacity:1;fill:#dbe3e2;fill-opacity:1;stroke-width:0.271971"
+           x="115.55298"
+           y="-189.37933">To do</tspan></text>
+    </g>
+  </g>
+</svg>

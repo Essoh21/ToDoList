@@ -7,6 +7,7 @@ import Icons from "./icons";
 import isToday from "date-fns/isToday";
 import getWeekOfMonth from "date-fns/getWeekOfMonth";
 import * as Storage from "./UserData";
+const backgroundImage = require("./images/back.jpg");
 
 
 const TODAY_TASKS_TITLE = 'Today tasks';

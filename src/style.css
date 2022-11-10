@@ -300,6 +300,7 @@ body {
     width: 100%;
     height: calc(100vh - 6rem);
     background-image: url('./images/back.jpg');
+    background-size: 200px;
     background-size: cover;
     display: flex;
     flex-direction: column;
