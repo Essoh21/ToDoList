@@ -15,11 +15,11 @@ module.exports = {
         filename: '[name].[contenthash].js',
         clean: true
     },
-    /* devServer: {
-         static: path.resolve(__dirname, "dist"),
-         open: true,
-         hot: true
-     },*/
+    /*devServer: {
+        static: path.resolve(__dirname, "dist"),
+        open: true,
+        hot: true
+    }, */
 
     // loaders 
     module: {

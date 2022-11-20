@@ -11,52 +11,45 @@ const todayTasksIconSrc = Icons.todayTasksIcon;
 const importantTasksIconSrc = Icons.alertCercle;
 const nextWeekIconSrc = Icons.nextIcon;
 
-
 const sheduleImgsClassNames = [
-    'today-tasks header-logo', 'important-tasks header-logo',
-    'next-week-tasks header-logo'
+  'today-tasks header-logo', 'important-tasks header-logo',
+  'next-week-tasks header-logo',
 ];
+
 const sheduleImgAlts = [
-    'sunset', 'red cercle', 'arrow right cercle'
+  'sunset', 'red cercle', 'arrow right cercle',
 ];
 
 const sheduleImgSrcs = [
-    todayTasksIconSrc, importantTasksIconSrc, nextWeekIconSrc
+  todayTasksIconSrc, importantTasksIconSrc, nextWeekIconSrc,
 ];
 
 for (let i = 0; i < sheduleImgsClassNames.length; i += 1) {
-    const imgNode = Html.createNewImgTagWithClassName(sheduleImgsClassNames[i]);
-    Html.addSrcToImgNode(sheduleImgSrcs[i], imgNode);
-    Html.addAltToImgNode(sheduleImgAlts[i], imgNode);
-    sheduleLogosNodes.push(imgNode);
-
+  const imgNode = Html.createNewImgTagWithClassName(sheduleImgsClassNames[i]);
+  Html.addSrcToImgNode(sheduleImgSrcs[i], imgNode);
+  Html.addAltToImgNode(sheduleImgAlts[i], imgNode);
+  sheduleLogosNodes.push(imgNode);
 }
 
-
-
 const sheduleContainersClassNames = ['today tasks-header',
-    'today tasks-container', 'important tasks-header',
-    'important tasks-container', 'next-week tasks-header',
-    'next-week tasks-container'
+  'today tasks-container', 'important tasks-header',
+  'important tasks-container', 'next-week tasks-header',
+  'next-week tasks-container',
 ];
 
 sheduleContainersClassNames.forEach((className) => {
-    const sheduleNode = Html.createNewDivWithClassName(className);
-    sheduleContainersNodes.push(sheduleNode);
-})
-
-
+  const sheduleNode = Html.createNewDivWithClassName(className);
+  sheduleContainersNodes.push(sheduleNode);
+});
 
 const sheduleHeadersTitlesContainersClassNames = [
-    'today-tasks header-title', 'important-tasks header-title',
-    'next-week-tasks header-title'
+  'today-tasks header-title', 'important-tasks header-title',
+  'next-week-tasks header-title',
 ];
 sheduleHeadersTitlesContainersClassNames.forEach((titleClassName) => {
-    const titleNode = Html.createNewDivWithClassName(titleClassName);
-    sheduleHeaderTitlesNodes.push(titleNode);
-})
-
-
+  const titleNode = Html.createNewDivWithClassName(titleClassName);
+  sheduleHeaderTitlesNodes.push(titleNode);
+});
 
 const reducedIconSrc = Icons.chevronRightIcon;
 const REDUCED_ICON_CLASSNAME = 'reduced icon';
@@ -66,8 +59,7 @@ Html.addSrcToImgNode(reducedIconSrc, reduceIconContainer);
 Html.addAltToImgNode(REDUCED_ICON_ALT, reduceIconContainer);
 sheduleReducedIconNode.push(reduceIconContainer);
 
-
-// 
+//
 
 // Popup that collect project title
 
@@ -88,14 +80,13 @@ const newProjectCancelButton = Html.createNewDivWithClassName(NEW_PROJECT_CANCEL
 Html.useTextAsInnerHtmlOfNode(CANCEL_BUTTON_TEXT, newProjectCancelButton);
 const popupButtonsArray = [newProjectAddButton, newProjectCancelButton];
 popupButtonsArray.forEach((button) => {
-    Html.appendHtmlChildNodeToParentNode(button, newProjectPopupButtons);
-})
+  Html.appendHtmlChildNodeToParentNode(button, newProjectPopupButtons);
+});
 
 const newProjectPopupItems = [projetTitleCollecter, newProjectPopupButtons];
 newProjectPopupItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, newProjectPopup);
-})
-
+  Html.appendHtmlChildNodeToParentNode(item, newProjectPopup);
+});
 
 //   the line to click in order to load newProject popup
 const NEW_PROJECT_LINE_CLASSNAME = 'new-project-line';
@@ -104,7 +95,6 @@ const NEW_PROJECT_LINE_RIGHT_ICON_CLASSNAME = 'project-line-right-icon';
 const NEW_PROJECT_LEFT_ICON_ALT = 'add cercle icon';
 const NEW_PROJECT_RIGHT_ICON_ALT = 'add folder icon';
 const NEW_PROJECT_LINE_TITLE_CLASSNAME = 'new-project-line-title';
-
 
 const newProjectLine = Html.createNewDivWithClassName(NEW_PROJECT_LINE_CLASSNAME);
 const newProjectLineTitleContainer = Html.createNewDivWithClassName(NEW_PROJECT_LINE_TITLE_CLASSNAME);
@@ -116,69 +106,63 @@ const newProjectLineRightIconContainer = Html.createNewImgTagWithClassName(NEW_P
 Html.addSrcToImgNode(Icons.addFolderIcon, newProjectLineRightIconContainer);
 Html.addAltToImgNode(NEW_PROJECT_RIGHT_ICON_ALT, newProjectLineRightIconContainer);
 
-
 // what is going to be displayed as project
 
 class Project {
-    constructor(projectName, projectIconContainerClassName = 'new-project-icon',
-        projectNameContainerClassName = 'new-project-name-container',
-        projectReducedIconContainerClassName = 'new-project-reduced-icon',
-        newProjectContainerClassName = 'new-project-container',
-        newProjectLogoSrc = Icons.projectIcon,
-        projectReducedIconSrc = Icons.chevronRightIcon,
-        newProjectLogoAlt = 'project icon',
-        projectReducedIconAlt = 'chevron right'
-    ) {
-        this.projectName = projectName;
-        this.projectIconContainerClasseName = projectIconContainerClassName;
-        this.projectNameContainerClassName = projectNameContainerClassName;
-        this.projectReducedIconContainerClassName = projectReducedIconContainerClassName;
-        this.newProjectContainerClassName = newProjectContainerClassName
-        this.newProjectLogoSrc = newProjectLogoSrc;
-        this.projectReducedIconSrc = projectReducedIconSrc;
-        this.newProjectLogoAlt = newProjectLogoAlt;
-        this.projectReducedIconAlt = projectReducedIconAlt;
-    }
+  constructor(
+    projectName,
+    projectIconContainerClassName = 'new-project-icon',
+    projectNameContainerClassName = 'new-project-name-container',
+    projectReducedIconContainerClassName = 'new-project-reduced-icon',
+    newProjectContainerClassName = 'new-project-container',
+    newProjectLogoSrc = Icons.projectIcon,
+    projectReducedIconSrc = Icons.chevronRightIcon,
+    newProjectLogoAlt = 'project icon',
+    projectReducedIconAlt = 'chevron right',
+  ) {
+    this.projectName = projectName;
+    this.projectIconContainerClasseName = projectIconContainerClassName;
+    this.projectNameContainerClassName = projectNameContainerClassName;
+    this.projectReducedIconContainerClassName = projectReducedIconContainerClassName;
+    this.newProjectContainerClassName = newProjectContainerClassName;
+    this.newProjectLogoSrc = newProjectLogoSrc;
+    this.projectReducedIconSrc = projectReducedIconSrc;
+    this.newProjectLogoAlt = newProjectLogoAlt;
+    this.projectReducedIconAlt = projectReducedIconAlt;
+  }
 
-    createProjectLogoHtml() {
-        const projectLogo = Html.createNewImgTagWithClassName(this.projectIconContainerClasseName);
-        Html.addSrcToImgNode(this.newProjectLogoSrc, projectLogo);
-        Html.addAltToImgNode(this.newProjectLogoAlt, projectLogo);
-        return projectLogo;
-    }
+  createProjectLogoHtml() {
+    const projectLogo = Html.createNewImgTagWithClassName(this.projectIconContainerClasseName);
+    Html.addSrcToImgNode(this.newProjectLogoSrc, projectLogo);
+    Html.addAltToImgNode(this.newProjectLogoAlt, projectLogo);
+    return projectLogo;
+  }
 
-    createProjectReducedIconHtml() {
-        const projectReducedIcon = Html.createNewImgTagWithClassName(this.projectReducedIconContainerClassName);
-        Html.addSrcToImgNode(this.projectReducedIconSrc, projectReducedIcon);
-        Html.addAltToImgNode(this.projectReducedIconAlt, projectReducedIcon);
+  createProjectReducedIconHtml() {
+    const projectReducedIcon = Html.createNewImgTagWithClassName(this.projectReducedIconContainerClassName);
+    Html.addSrcToImgNode(this.projectReducedIconSrc, projectReducedIcon);
+    Html.addAltToImgNode(this.projectReducedIconAlt, projectReducedIcon);
 
-        return projectReducedIcon;
-    }
-    createNewProjectHtml() {
-        const projectContainer = Html.createNewDivWithClassName(this.newProjectContainerClassName).cloneNode(true);
-        const projectIcon = this.createProjectLogoHtml();
-        const projectNameContainer = Html.createNewDivWithClassName(this.projectNameContainerClassName);
-        Html.useTextAsInnerHtmlOfNode(this.projectName, projectNameContainer);
-        const projectReducedIconContainer = this.createProjectReducedIconHtml().cloneNode(true);
-        const projectContainerItems = [projectIcon, projectNameContainer, projectReducedIconContainer];
+    return projectReducedIcon;
+  }
 
-        projectContainerItems.forEach((item) => {
-            Html.appendHtmlChildNodeToParentNode(item, projectContainer);
-        })
+  createNewProjectHtml() {
+    const projectContainer = Html.createNewDivWithClassName(this.newProjectContainerClassName).cloneNode(true);
+    const projectIcon = this.createProjectLogoHtml();
+    const projectNameContainer = Html.createNewDivWithClassName(this.projectNameContainerClassName);
+    Html.useTextAsInnerHtmlOfNode(this.projectName, projectNameContainer);
+    const projectReducedIconContainer = this.createProjectReducedIconHtml().cloneNode(true);
+    const projectContainerItems = [projectIcon, projectNameContainer, projectReducedIconContainer];
 
+    projectContainerItems.forEach((item) => {
+      Html.appendHtmlChildNodeToParentNode(item, projectContainer);
+    });
 
-        return projectContainer;
-    }
-
-
-
-
-
-
+    return projectContainer;
+  }
 }
 
-//+++++++++++++ Tasks container 
-
+// +++++++++++++ Tasks container
 const TASKS_BODY_CONTAINER_HEADER_CLASSNAME = 'tasks-header';
 const TASKS_TABLE_CLASSNAME = 'tasks-table';
 const COLUMNS_HEADERS_CONTAINER_CLASSNAME = 'columns-headers-container';
@@ -188,12 +172,17 @@ const HEADER_DATE_CLASSNAME = 'header-date';
 const HEADER_DELETE_CLASSNAME = 'header-delete';
 const TABLE_TASKS_CONTAINER_CLASSNAME = 'table-tasks-container';
 
+const humburgerMenuContainer = Html.createNewImgTagWithClassName('humburger-menu');
+Html.addAltToImgNode('icon to expand options', humburgerMenuContainer);
+Html.addSrcToImgNode(Icons.humbergerMenuIcon, humburgerMenuContainer);
 
-// tasksContainer header 
+
+
+// tasksContainer header
 
 const tasksContainerHeader = Html.createNewDivWithClassName(TASKS_BODY_CONTAINER_HEADER_CLASSNAME);
 Html.useTextAsInnerHtmlOfNode('Project Title', tasksContainerHeader);
-//+++++tasks table 
+// +++++tasks table
 
 const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
 
@@ -202,8 +191,7 @@ const NEW_TASK_LINE_CLASSNAME = 'new-task-line';
 const NEW_TASK_LINE_ICON_CLASSNAME = 'new-task-line-icon';
 const NEW_TASK_LINE_ICON_ALT = 'plus icon';
 const NEW_TASK_LINE_TITLE_CLASSNAME = 'new-task-line-title';
-const NEW_TASK_LINE_TITLE = 'Click to add a task to do '
-
+const NEW_TASK_LINE_TITLE = 'Click to add a task to do ';
 
 const newTaskLine = Html.createNewDivWithClassName(NEW_TASK_LINE_CLASSNAME);
 const newTaskLineTitleContainer = Html.createNewDivWithClassName(NEW_TASK_LINE_TITLE_CLASSNAME);
@@ -212,17 +200,15 @@ const newTaskLineIcon = Html.createNewImgTagWithClassName(NEW_TASK_LINE_ICON_CLA
 Html.addSrcToImgNode(Icons.addPlusIcon, newTaskLineIcon);
 Html.addAltToImgNode(NEW_TASK_LINE_ICON_ALT, newTaskLineIcon);
 
-
 const newTaskLineItems = [
-    newTaskLineIcon, newTaskLineTitleContainer
+  newTaskLineIcon, newTaskLineTitleContainer,
 ];
 
 newTaskLineItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, newTaskLine);
-})
+  Html.appendHtmlChildNodeToParentNode(item, newTaskLine);
+});
 
-
-// columns headers 
+// columns headers
 const HEADER_EDIT_INNER_TEXT = 'Edit';
 const HEADER_DATES_INNER_TEXT = 'Dates';
 const HEADER_COMPLETED_INNER_TEXT = 'Completed';
@@ -241,33 +227,24 @@ Html.useTextAsInnerHtmlOfNode(HEADER_COMPLETED_INNER_TEXT, headerCompleted);
 const headerDelete = Html.createNewDivWithClassName(HEADER_DELETE_CLASSNAME);
 Html.useTextAsInnerHtmlOfNode(HEADER_DELETE_INNER_TEXT, headerDelete);
 
-
-
 const columnsHeadersContainerItems = [
-    headerEdit, headerDate, headerCompleted, headerDelete
-]
+  headerEdit, headerDate, headerCompleted, headerDelete,
+];
 columnsHeadersContainerItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, columnsHeadersContainer);
-})
+  Html.appendHtmlChildNodeToParentNode(item, columnsHeadersContainer);
+});
 
-//    
-
+//
 const tasksContainer = Html.createNewDivWithClassName(TABLE_TASKS_CONTAINER_CLASSNAME);
 
 const tasksTableItems = [
-    newTaskLine, columnsHeadersContainer, tasksContainer
-]
+  newTaskLine, columnsHeadersContainer, tasksContainer,
+];
 tasksTableItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, tasksTable);
-})
-
-//
-
-
-
+  Html.appendHtmlChildNodeToParentNode(item, tasksTable);
+});
 
 // new Task popup
-
 const TASK_POPUP_CONTAINER_CLASSNAME = 'task-popup-container';
 const TASK_POPUP_HEADER_CLASSNAME = 'task-popup-header';
 const TASK_POPUP_BODY_CLASSNAME = 'task-popup-body';
@@ -297,8 +274,6 @@ const CLOSE_TASKPOPUP_ICON_ALT = 'close icon';
 const CLOSE_TASKPOPUP_ICON_SRC = Icons.closeIcon;
 const CLOSE_ICON_TITLE = 'Click to cancel';
 
-
-
 const taskPopupContainer = Html.createNewDivWithClassName(TASK_POPUP_CONTAINER_CLASSNAME);
 
 const taskPopupHeader = Html.createNewDivWithClassName(TASK_POPUP_HEADER_CLASSNAME);
@@ -307,7 +282,6 @@ Html.addSrcToImgNode(CLOSE_TASKPOPUP_ICON_SRC, closeTaskPopupIcon);
 Html.addAltToImgNode(CLOSE_TASKPOPUP_ICON_ALT, closeTaskPopupIcon);
 closeTaskPopupIcon.title = `${CLOSE_ICON_TITLE}`;
 Html.appendHtmlChildNodeToParentNode(closeTaskPopupIcon, taskPopupHeader);
-
 
 const taskPopupBody = Html.createNewDivWithClassName(TASK_POPUP_BODY_CLASSNAME);
 const taskPopupBodyLeft = Html.createNewDivWithClassName(TASK_POPUP_BODY_LEFT_CLASSNAME);
@@ -328,7 +302,6 @@ descriptionCollecter.name = TASK_DESCRIPTION_VALUE_HOLDER;
 descriptionCollecter.rows = TEXT_AREA_NUMBER_OF_LINES;
 descriptionCollecter.cols = TEXT_AREA_NUMBER_OF_WORDS_PER_LINE;
 
-
 const taskPopupBodyRightLow = Html.createNewDivWithClassName(TASK_POPUP_BODY_RIGHT_LOW_CLASSNAME);
 const dueDateContainer = Html.createNewDivWithClassName(DUE_DATE_CONTAINER_CLASSNAME);
 const dueDateLabel = Html.createNewLabelFor(DUE_DATE_COLLECTER_ID);
@@ -342,7 +315,6 @@ const checkbox = Html.createNewCheckboxInputWithid(CHECKBOX_ID);
 const taskPopupAddButton = Html.createNewDivWithClassName(ADD_TASK_BUTTON_CLASSNAME);
 Html.useTextAsInnerHtmlOfNode(ADD_TASK_TEXT, taskPopupAddButton);
 
-
 const taskPopupContainerItems = [taskPopupHeader, taskPopupBody];
 const taskPopupBodyItems = [taskPopupBodyLeft, taskPopupBodyRight];
 const taskPopupBodyRightItems = [taskPopupBodyRightUp, taskPopupBodyRightLow];
@@ -353,183 +325,171 @@ const dueDateContainerItems = [dueDateLabel, dueDateCollecter];
 const importanceCheckBoxContainerItems = [checkboxLabel, checkbox];
 const taskPopupBodyRightLowItems = [dueDateContainer, importanceCheckBoxContainer, taskPopupAddButton];
 
-
-
-
 taskTitleCollecterContainerItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, taskTitleCollecterContainer);
-})
+  Html.appendHtmlChildNodeToParentNode(item, taskTitleCollecterContainer);
+});
 
 descriptionCollecterContainerItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, descriptionCollecterContainer);
-})
+  Html.appendHtmlChildNodeToParentNode(item, descriptionCollecterContainer);
+});
 
 taskPopupBodyRightUpItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRightUp);
-})
+  Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRightUp);
+});
 
 dueDateContainerItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, dueDateContainer);
-})
+  Html.appendHtmlChildNodeToParentNode(item, dueDateContainer);
+});
 
 importanceCheckBoxContainerItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, importanceCheckBoxContainer);
-})
+  Html.appendHtmlChildNodeToParentNode(item, importanceCheckBoxContainer);
+});
 
 taskPopupBodyRightLowItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRightLow);
-})
+  Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRightLow);
+});
 
 taskPopupBodyRightItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRight);
-})
+  Html.appendHtmlChildNodeToParentNode(item, taskPopupBodyRight);
+});
 
 taskPopupBodyItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, taskPopupBody);
-})
+  Html.appendHtmlChildNodeToParentNode(item, taskPopupBody);
+});
 
 taskPopupContainerItems.forEach((item) => {
-    Html.appendHtmlChildNodeToParentNode(item, taskPopupContainer);
-})
+  Html.appendHtmlChildNodeToParentNode(item, taskPopupContainer);
+});
 
-
-
-
-
-
-
-
-// What is going to be displayed as Task 
+// What is going to be displayed as Task
 
 class Task {
-    constructor(
-        titleContainerClassName = 'task-title-container',
-        taskEditIconContainerClassName = 'task-edit-icon',
-        editIconAlt = 'edit icon', editIconSrc = Icons.editIcon,
-        taskIconAlt = 'task icon', taskIconSrc = Icons.taskIcon,
-        dueDateContainerClassName = 'duedate-container', completionInputId = 'completion-id',
-        taskIconContainerClassName = 'task-icon', editIconClassName = 'edit-icon',
-        deleteIconClassName = 'delete-icon', deleteIconSrc = Icons.trashIcon,
-        deleteIconAlt = 'trash icon',
-        completionContainerClassName = 'completion-container',
-        completionInputLabelclassName = 'completion-input-label',
-        taskContainerClassName = 'task-container', taskTitle = 'no title',
-        dueDate = 'no date',
-        taskIconAndTitleContainerClassName = 'task-icon-and-title-container',
-        checkmarkContainerClassName = 'checkmark-container'
+  constructor(
+    titleContainerClassName = 'task-title-container',
+    taskEditIconContainerClassName = 'task-edit-icon',
+    editIconAlt = 'edit icon',
+    editIconSrc = Icons.editIcon,
+    taskIconAlt = 'task icon',
+    taskIconSrc = Icons.taskIcon,
+    dueDateContainerClassName = 'duedate-container',
+    completionInputId = 'completion-id',
+    taskIconContainerClassName = 'task-icon',
+    editIconClassName = 'edit-icon',
+    deleteIconClassName = 'delete-icon',
+    deleteIconSrc = Icons.trashIcon,
+    deleteIconAlt = 'trash icon',
+    completionContainerClassName = 'completion-container',
+    completionInputLabelclassName = 'completion-input-label',
+    taskContainerClassName = 'task-container',
+    taskTitle = 'no title',
+    dueDate = 'no date',
+    taskIconAndTitleContainerClassName = 'task-icon-and-title-container',
+    checkmarkContainerClassName = 'checkmark-container',
 
-    ) {
-        this.titleContainerClassName = titleContainerClassName;
-        this.taskEditIconContainerClassName = taskEditIconContainerClassName;
-        this.taskIconAlt = taskIconAlt;
-        this.taskIconSrc = taskIconSrc;
-        this.editIconSrc = editIconSrc;
-        this.editIconAlt = editIconAlt;
-        this.dueDateContainerClassName = dueDateContainerClassName;
-        this.completionInputId = completionInputId;
-        this.taskIconContainerClassName = taskIconContainerClassName;
-        this.editIconClassName = editIconClassName;
-        this.deleteIconClassName = deleteIconClassName;
-        this.deleteIconSrc = deleteIconSrc;
-        this.deleteIconAlt = deleteIconAlt;
-        this.completionContainerClassName = completionContainerClassName;
-        this.completionInputLabelclassName = completionInputLabelclassName;
-        this.taskContainerClassName = taskContainerClassName;
-        this.dueDate = dueDate;
-        this.taskTitle = taskTitle;
-        this.taskIconAndTitleContainerClassName = taskIconAndTitleContainerClassName;
-        this.checkmarkContainerClassName = checkmarkContainerClassName;
-    }
+  ) {
+    this.titleContainerClassName = titleContainerClassName;
+    this.taskEditIconContainerClassName = taskEditIconContainerClassName;
+    this.taskIconAlt = taskIconAlt;
+    this.taskIconSrc = taskIconSrc;
+    this.editIconSrc = editIconSrc;
+    this.editIconAlt = editIconAlt;
+    this.dueDateContainerClassName = dueDateContainerClassName;
+    this.completionInputId = completionInputId;
+    this.taskIconContainerClassName = taskIconContainerClassName;
+    this.editIconClassName = editIconClassName;
+    this.deleteIconClassName = deleteIconClassName;
+    this.deleteIconSrc = deleteIconSrc;
+    this.deleteIconAlt = deleteIconAlt;
+    this.completionContainerClassName = completionContainerClassName;
+    this.completionInputLabelclassName = completionInputLabelclassName;
+    this.taskContainerClassName = taskContainerClassName;
+    this.dueDate = dueDate;
+    this.taskTitle = taskTitle;
+    this.taskIconAndTitleContainerClassName = taskIconAndTitleContainerClassName;
+    this.checkmarkContainerClassName = checkmarkContainerClassName;
+  }
 
+  createTaskIcon() {
+    const taskIcon = Html.createNewImgTagWithClassName(this.taskIconContainerClassName);
+    Html.addSrcToImgNode(this.taskIconSrc, taskIcon);
+    Html.addAltToImgNode(this.taskIconAlt, taskIcon);
+    return taskIcon;
+  }
 
-    createTaskIcon() {
-        const taskIcon = Html.createNewImgTagWithClassName(this.taskIconContainerClassName);
-        Html.addSrcToImgNode(this.taskIconSrc, taskIcon);
-        Html.addAltToImgNode(this.taskIconAlt, taskIcon);
-        return taskIcon;
+  createEditIcon() {
+    const editIcon = Html.createNewImgTagWithClassName(this.editIconClassName);
+    Html.addSrcToImgNode(this.editIconSrc, editIcon);
+    Html.addAltToImgNode(this.editIconAlt, editIcon);
+    return editIcon;
+  }
 
-    }
+  createTrashIcon() {
+    const trashIcon = Html.createNewImgTagWithClassName(this.deleteIconClassName);
+    Html.addSrcToImgNode(this.deleteIconSrc, trashIcon);
+    Html.addAltToImgNode(this.deleteIconAlt, trashIcon);
+    return trashIcon;
+  }
 
-    createEditIcon() {
-        const editIcon = Html.createNewImgTagWithClassName(this.editIconClassName);
-        Html.addSrcToImgNode(this.editIconSrc, editIcon);
-        Html.addAltToImgNode(this.editIconAlt, editIcon);
-        return editIcon;
-    }
+  createTitleContainerWithtitle() {
+    const titleContainer = Html.createNewDivWithClassName(this.titleContainerClassName);
+    Html.useTextAsInnerHtmlOfNode(this.taskTitle, titleContainer);
+    return titleContainer;
+  }
 
-    createTrashIcon() {
-        const trashIcon = Html.createNewImgTagWithClassName(this.deleteIconClassName);
-        Html.addSrcToImgNode(this.deleteIconSrc, trashIcon);
-        Html.addAltToImgNode(this.deleteIconAlt, trashIcon);
-        return trashIcon;
-    }
+  createTaskIconAndTitleContainer() {
+    const taskIconAndTitleContainer = Html.createNewDivWithClassName(this.taskIconAndTitleContainerClassName);
+    return taskIconAndTitleContainer;
+  }
 
-    createTitleContainerWithtitle() {
-        const titleContainer = Html.createNewDivWithClassName(this.titleContainerClassName);
-        Html.useTextAsInnerHtmlOfNode(this.taskTitle, titleContainer);
-        return titleContainer;
-    }
-    createTaskIconAndTitleContainer() {
-        const taskIconAndTitleContainer = Html.createNewDivWithClassName(this.taskIconAndTitleContainerClassName);
-        return taskIconAndTitleContainer;
-    }
+  createDuedateContainerWithDueDate() {
+    const dueDateContainer = Html.createNewDivWithClassName(this.dueDateContainerClassName);
+    Html.useTextAsInnerHtmlOfNode(this.dueDate, dueDateContainer);
+    return dueDateContainer;
+  }
 
-    createDuedateContainerWithDueDate() {
-        const dueDateContainer = Html.createNewDivWithClassName(this.dueDateContainerClassName);
-        Html.useTextAsInnerHtmlOfNode(this.dueDate, dueDateContainer)
-        return dueDateContainer;
-    }
+  createCompletionStatusContainer() {
+    const completionContainer = Html.createNewDivWithClassName(this.completionContainerClassName);
+    const completionInput = Html.createNewCheckboxInput();
+    const completionInputLabel = Html.createNewLabel();
+    const checkmarkContainer = Html.createNewSpan();
+    checkmarkContainer.className = this.checkmarkContainerClassName;
+    completionInputLabel.className = this.completionInputLabelclassName;
+    const completionInputLabelItems = [completionInput, checkmarkContainer];
+    completionInputLabelItems.forEach((item) => {
+      Html.appendHtmlChildNodeToParentNode(item, completionInputLabel);
+    });
+    Html.appendHtmlChildNodeToParentNode(completionInputLabel, completionContainer);
+    return completionContainer;
+  }
 
-    createCompletionStatusContainer() {
-        const completionContainer = Html.createNewDivWithClassName(this.completionContainerClassName);
-        const completionInput = Html.createNewCheckboxInput();
-        const completionInputLabel = Html.createNewLabel();
-        const checkmarkContainer = Html.createNewSpan();
-        checkmarkContainer.className = this.checkmarkContainerClassName;
-        completionInputLabel.className = this.completionInputLabelclassName;
-        const completionInputLabelItems = [completionInput, checkmarkContainer];
-        completionInputLabelItems.forEach((item) => {
-            Html.appendHtmlChildNodeToParentNode(item, completionInputLabel);
-        })
-        Html.appendHtmlChildNodeToParentNode(completionInputLabel, completionContainer);
-        return completionContainer;
-
-    }
-
-    createNewTask() {
-        const newTaskContainer = Html.createNewDivWithClassName(this.taskContainerClassName);
-        const taskIcon = this.createTaskIcon().cloneNode(true);
-        const taskTitleContainer = this.createTitleContainerWithtitle();
-        const taskIconAndTitleContainer = this.createTaskIconAndTitleContainer();
-        const taskIconAndTitleContainerItems = [taskIcon, taskTitleContainer];
-        taskIconAndTitleContainerItems.forEach((item) => {
-            Html.appendHtmlChildNodeToParentNode(item, taskIconAndTitleContainer);
-        })
-        const editIcon = this.createEditIcon().cloneNode(true);
-        const dueDateContainer = this.createDuedateContainerWithDueDate();
-        const taskCompletioncontainer = this.createCompletionStatusContainer();
-        const trashIcon = this.createTrashIcon().cloneNode(true);
-        const newTaskContainerItems = [taskIconAndTitleContainer, editIcon, dueDateContainer,
-            taskCompletioncontainer, trashIcon
-        ]
-        newTaskContainerItems.forEach((item) => {
-            Html.appendHtmlChildNodeToParentNode(item, newTaskContainer);
-        })
-        return newTaskContainer;
-
-    }
-
+  createNewTask() {
+    const newTaskContainer = Html.createNewDivWithClassName(this.taskContainerClassName);
+    const taskIcon = this.createTaskIcon().cloneNode(true);
+    const taskTitleContainer = this.createTitleContainerWithtitle();
+    const taskIconAndTitleContainer = this.createTaskIconAndTitleContainer();
+    const taskIconAndTitleContainerItems = [taskIcon, taskTitleContainer];
+    taskIconAndTitleContainerItems.forEach((item) => {
+      Html.appendHtmlChildNodeToParentNode(item, taskIconAndTitleContainer);
+    });
+    const editIcon = this.createEditIcon().cloneNode(true);
+    const dueDateContainer = this.createDuedateContainerWithDueDate();
+    const taskCompletioncontainer = this.createCompletionStatusContainer();
+    const trashIcon = this.createTrashIcon().cloneNode(true);
+    const newTaskContainerItems = [taskIconAndTitleContainer, editIcon, dueDateContainer,
+      taskCompletioncontainer, trashIcon,
+    ];
+    newTaskContainerItems.forEach((item) => {
+      Html.appendHtmlChildNodeToParentNode(item, newTaskContainer);
+    });
+    return newTaskContainer;
+  }
 }
 
-
-
-
 export {
-    sheduleContainersNodes, sheduleHeaderTitlesNodes, sheduleLogosNodes,
-    sheduleReducedIconNode, newProjectLine, newProjectLeftIconContainer,
-    newProjectLineRightIconContainer, newProjectLineTitleContainer,
-    newProjectPopup, tasksContainerHeader,
-    Project, tasksTable, tasksContainer, taskPopupContainer, Task
+  sheduleContainersNodes, sheduleHeaderTitlesNodes, sheduleLogosNodes,
+  sheduleReducedIconNode, newProjectLine, newProjectLeftIconContainer,
+  newProjectLineRightIconContainer, newProjectLineTitleContainer,
+  newProjectPopup, tasksContainerHeader,
+  Project, tasksTable, tasksContainer,
+  taskPopupContainer, Task, humburgerMenuContainer,
 };
-
-

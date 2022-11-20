@@ -37,8 +37,6 @@ body {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    justify-content: space-between;
-
 }
 
 .header {
@@ -57,51 +55,59 @@ body {
     z-index: 100;
 }
 
-
 .homeBodyContainer {
+    position: relative;
     margin: 0;
     padding: 0;
-
     display: flex;
     flex-direction: row;
-
-
 }
 
-
 .leftContainer {
-    margin-left: 0;
-
+    position: relative;
+    margin: 0;
     width: 40vw;
-    background-color: var(--left-container-backgroud);
     height: calc(100vh - 6rem);
+    background-color: var(--left-container-backgroud);
     overflow: auto;
     font-family: var(--left-side-font);
 }
 
+.cross-lines {
+    position: absolute;
+    right: 0;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    visibility: hidden;
+}
+
 .profileAndScheduleContainer {
+    box-sizing: border-box;
+    margin: 0;
     padding-left: var(--left-side-padding);
-    min-height: 40%;
-    width: 92%;
+    height: 36%;
+    width: 100%;
 }
 
 .profileContainer {
+    height: 4.2rem;
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 2rem
+    gap: 1rem
 }
 
 .profileImageContainer {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 100%;
     background-color: var(--profile-name-color);
 }
 
 .profileNameContainer {
-    width: 10vw;
+    width: calc(100% - 4rem);
 }
 
 .profileName {
@@ -110,20 +116,18 @@ body {
 }
 
 .profileNameUnderline {
-    width: 100%;
+
     height: .8rem;
     background-color: var(--profilename-underline-color);
 }
 
 .scheduleContainer {
-    margin-top: 1rem;
-    height: 100%;
-    width: 100%;
+    height: calc(100% - 5.2rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1rem;
     margin-left: 1rem;
+    overflow: auto;
 
 }
 
@@ -131,6 +135,7 @@ body {
     color: var(--left-litle-titles-color);
     margin-top: .5rem;
     padding-left: var(--left-side-padding);
+    padding-right: .4rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -149,41 +154,31 @@ body {
     opacity: .8;
 }
 
-.today.tasks-header {
-    padding: .4rem;
-}
-
 .header-title {
     width: 6rem;
 
 }
 
-
 .projectsTitleContainer {
-    width: 100%;
-    height: 2rem;
+    margin: 0;
+    height: 5%;
     background-color: var(--profilename-underline-color);
     color: var(--left-container-backgroud);
     text-align: center;
-
-
 }
 
-
-
 .projectsContainer {
+    box-sizing: border-box;
     overflow: auto;
-    height: 52%;
+    height: calc(100% - (45% + 2rem));
+    width: 100%;
     padding-left: var(--left-side-padding);
     font-family: var(--left-side-font);
     display: flex;
     flex-direction: column;
     color: var(--left-litle-titles-color);
     font-weight: var(--titles-font-weight);
-    margin-bottom: 1rem;
 }
-
-
 
 .new-project-popup {
     display: none;
@@ -218,7 +213,6 @@ body {
 
 }
 
-
 .add-button,
 .cancel-button {
     font-size: clamp(.5rem, .75rem, 1.2rem);
@@ -250,6 +244,11 @@ body {
 
 }
 
+.add-button:hover,
+.cancel-button:hover {
+    opacity: .7;
+}
+
 .new-project-container {
 
     margin-top: .5rem;
@@ -259,6 +258,7 @@ body {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+
 }
 
 .new-project-container:hover,
@@ -277,8 +277,6 @@ body {
 
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-
     justify-content: space-between;
     cursor: pointer;
     margin-top: 1rem;
@@ -297,7 +295,7 @@ body {
 .tasksBodyContainer {
     position: relative;
     margin: 0;
-    width: 100%;
+    width: 60vw;
     height: calc(100vh - 6rem);
     background-image: url('./images/back.jpg');
     background-size: 200px;
@@ -305,6 +303,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.humburger-menu {
+    position: absolute;
+    left: 0;
+    visibility: hidden;
 }
 
 .tasksBodyContainer .tasks-header {
@@ -326,7 +330,7 @@ body {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 6fr 1fr 2.5fr 1.5fr 1fr;
+    grid-template-columns: 4fr 1fr 2.5fr 1.5fr 1fr;
     grid-template-rows: .8fr 1fr 7.2fr;
     grid-template-areas: "newTaskLine newTaskLine newTaskLine newTaskLine newTaskLine"
         " tasksHeadersContainer tasksHeadersContainer tasksHeadersContainer tasksHeadersContainer tasksHeadersContainer"
@@ -415,7 +419,7 @@ body {
     padding: .3rem 0;
     width: 100%;
     display: grid;
-    grid-template-columns: 6fr 1fr 2.5fr 1.5fr 1fr;
+    grid-template-columns: 4fr 1fr 2.5fr 1.5fr 1fr;
     grid-template-areas: "iconAndTitleContainer editIcon dueDateContainer completionContainer deleteIcon";
     color: var(--header-background-color);
     font-weight: bold;
@@ -696,8 +700,8 @@ input[type='checkbox']:checked~.checkmark-container::before {
     opacity: .7;
 }
 
-
 .footer {
+    margin: 0;
     justify-self: flex-end;
     height: 2rem;
     width: 100vw;
@@ -706,4 +710,33 @@ input[type='checkbox']:checked~.checkmark-container::before {
     align-items: center;
     justify-content: center;
     color: var(--profile-name-color);
+}
+
+/*  media query for small screen devices */
+@media screen and (max-width: 820px) {
+    .leftContainer {
+        width: 0;
+
+    }
+
+    .leftContainer.active {
+        z-index: 100;
+        position: absolute;
+        left: 0;
+        width: 60vw;
+        transition: width .1s ease-in-out;
+    }
+
+    .tasksBodyContainer {
+        width: 100vw;
+    }
+
+    .humburger-menu {
+        visibility: visible;
+        cursor: pointer;
+    }
+
+    .cross-lines {
+        visibility: visible;
+    }
 }

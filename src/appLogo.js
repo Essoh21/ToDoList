@@ -1,5 +1,5 @@
+import Icons from './icons';
 
-import Icons from "./icons.js";
 const LOGO_HEIGHT = 190;
 const LOGO_WIDTH = 190;
 
@@ -10,7 +10,3 @@ appLogo.width = LOGO_WIDTH;
 appLogo.className = 'app-logo';
 
 export default appLogo;
-
-
-
-

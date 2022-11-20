@@ -13,10 +13,25 @@ const logoIcon = require('./icons/logo.svg');
 const chevronRightIcon = require('./icons/chevron-right.svg');
 const chevronDownIcon = require('./icons/chevron-down.svg');
 const closeIcon = require('./icons/close.svg');
+const humbergerMenuIcon = require('./images/humburgerMenu.png');
+
 
 const Icons = {
-    alertCercle, projectIcon, nextIcon, checkIcon, taskIcon,
-    editIcon, addFolderIcon, addCircleIcon, addPlusIcon,
-    todayTasksIcon, trashIcon, logoIcon, chevronDownIcon, chevronRightIcon, closeIcon
-}
+    alertCercle,
+    projectIcon,
+    nextIcon,
+    checkIcon,
+    taskIcon,
+    editIcon,
+    addFolderIcon,
+    addCircleIcon,
+    addPlusIcon,
+    todayTasksIcon,
+    trashIcon,
+    logoIcon,
+    chevronDownIcon,
+    chevronRightIcon,
+    closeIcon,
+    humbergerMenuIcon,
+};
 export default Icons;
