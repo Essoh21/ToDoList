@@ -1,6 +1,7 @@
 import isToday from 'date-fns/isToday';
 import getWeekOfMonth from 'date-fns/getWeekOfMonth';
 import style from './style.css';
+import html from './index.html'
 import appLogo from './appLogo';
 import * as Shedule from './itemsToDisplay.js';
 import * as Html from './htmlGenerator.js';

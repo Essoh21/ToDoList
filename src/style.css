@@ -533,7 +533,7 @@ input[type='checkbox']:checked~.checkmark-container::before {
 .task-popup-container {
 
     width: 70%;
-    height: 40vh;
+    height: 10rem;
     position: absolute;
     display: none;
     grid-template-columns: 1fr 4fr;
@@ -545,7 +545,7 @@ input[type='checkbox']:checked~.checkmark-container::before {
 }
 
 .task-popup-header {
-    height: 40px;
+    height: 100%;
     grid-area: popupHeader;
     background-color: var(--header-background-color);
     display: flex;
@@ -560,7 +560,7 @@ input[type='checkbox']:checked~.checkmark-container::before {
 }
 
 .task-popup-body {
-
+    height: 100%;
     grid-area: popupBody;
     display: grid;
     grid-template-columns: 1fr 4fr;
