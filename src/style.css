@@ -15,6 +15,10 @@
     --left-side-padding: .5em;
 }
 
+* {
+    user-select: none;
+}
+
 @font-face {
     font-family: 'Inter';
     font-style: normal;
@@ -22,6 +26,11 @@
     font-display: swap;
     src: url("Inter-Regular.woff2?v=3.19") format("woff2"),
         url("Inter-Regular.woff?v=3.19") format("woff");
+}
+
+a {
+    text-decoration: none;
+    color: var(--profilename-underline-color);
 }
 
 body {
@@ -531,10 +540,9 @@ input[type='checkbox']:checked~.checkmark-container::before {
 
 
 .task-popup-container {
-
-    width: 70%;
-    height: 10rem;
     position: absolute;
+    width: 70%;
+    height: 20%;
     display: none;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr 8fr;
@@ -588,7 +596,7 @@ input[type='checkbox']:checked~.checkmark-container::before {
     padding-top: .7rem;
     display: grid;
     grid-template-columns: 4fr 1fr;
-    grid-template-rows: 1fr 1.3fr 1fr;
+    grid-template-rows: 1fr .3fr 1fr;
     grid-template-areas:
         "taskPopupBodyRightUp  ..."
         " ... ... "
@@ -738,5 +746,35 @@ input[type='checkbox']:checked~.checkmark-container::before {
 
     .cross-lines {
         visibility: visible;
+
+    }
+
+    @media screen and (max-width: 400px) {
+        .new-task-line {
+            font-size: .8rem;
+            padding: .1rem;
+            width: 70%;
+            gap: 20%;
+
+        }
+
+        .leftContainer {
+            font-size: .9rem;
+        }
+
+        .cross-lines {
+            height: 1rem;
+            width: 1rem;
+
+        }
+
+        .tasksBodyContainer {
+            font-size: .8rem;
+        }
+
+        .task-popup-container {
+            font-size: .8rem;
+        }
+
     }
 }

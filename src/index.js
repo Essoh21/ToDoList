@@ -591,7 +591,6 @@ const humburgerMenu = document.querySelector('.humburger-menu');
 humburgerMenu.addEventListener('click', () => addActiveToClassName(leftContainerIdSelection));
 
 const iconToCloseContainer = document.querySelector('.cross-lines');
-Html.addSrcToImgNode(Icons.closeIcon, iconToCloseContainer);
 iconToCloseContainer.addEventListener('click', () => removeActiveFromeClassName(leftContainerIdSelection));
 
 // displaying projects on load 
