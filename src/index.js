@@ -477,7 +477,7 @@ document.addEventListener('click', (element) => {
         }
     }
 
-    if (element.target.matches('.close-icon')) {
+    if (element.target.matches('.close-icon') || (element.target.matches('.task-popup-header'))) {
         removeNewTaskPopup();
         displayNewTaskLine();
     }

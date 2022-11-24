@@ -560,11 +560,14 @@ input[type='checkbox']:checked~.checkmark-container::before {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    cursor: pointer;
 
 }
 
 .close-icon {
     cursor: pointer;
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
 .task-popup-body {
