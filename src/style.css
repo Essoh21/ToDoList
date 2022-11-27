@@ -314,6 +314,14 @@ body {
     align-items: center;
 }
 
+.main-tasks-header {
+    font-weight: bold;
+    margin-top: .5rem;
+    color: var(--header-background-color);
+    background-color: var(--left-container-backgroud);
+    padding: .3rem;
+}
+
 .humburger-menu {
     position: absolute;
     left: 0;

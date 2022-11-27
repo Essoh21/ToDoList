@@ -128,7 +128,7 @@ function updateActiveProjectTitle() {
 }
 
 function updateTitleOfHeader() {
-    const tasksBodyContainerHeader = document.querySelector('.tasksBodyContainer>.tasks-header');
+    const tasksBodyContainerHeader = document.querySelector('.tasksBodyContainer>.main-tasks-header');
     tasksBodyContainerHeader.innerHTML = activeProjectTitle;
 }
 
@@ -601,3 +601,35 @@ function displayOnLoad() {
 }
 
 displayOnLoad();
+
+// deleting project on demande
+
+function deleteProject() {
+    if (confirm('do you realy want to delete this project and its tasks?')) {
+        deleteProjectOfIndexFromAllProjects(activeProjectIndexFromAllProjects);
+        deleteProjectTasksNodeContainerOfIndexFromContainer(activeProjectIndexFromAllProjects);
+        Storage.storeUserAllProjectsToHisLocalStorage(allProjects);
+        Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
+        clearProjectsFromDisplay()
+        displayAllProjects();
+        clearTableTasksContainer();
+        activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProjectToStore);
+        displayActiveProjectTasks();
+    }
+
+}
+
+function deleteProjectOfIndexFromAllProjects(projectIndex) {
+    allProjects.splice(projectIndex, 1);
+}
+
+function deleteProjectTasksNodeContainerOfIndexFromContainer(tasksNodesContainerIndex, container = projectsTasksNodesContainersContainer) {
+    container.splice(tasksNodesContainerIndex, 1);
+}
+
+/*
+const mainTaskHeader = document.querySelector('.main-tasks-header');
+mainTaskHeader.addEventListener('click', deleteProject);
+*/
+
+

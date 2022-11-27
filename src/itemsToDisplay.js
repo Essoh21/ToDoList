@@ -163,7 +163,7 @@ class Project {
 }
 
 // +++++++++++++ Tasks container
-const TASKS_BODY_CONTAINER_HEADER_CLASSNAME = 'tasks-header';
+const TASKS_BODY_CONTAINER_HEADER_CLASSNAME = 'main-tasks-header';
 const TASKS_TABLE_CLASSNAME = 'tasks-table';
 const COLUMNS_HEADERS_CONTAINER_CLASSNAME = 'columns-headers-container';
 const HEADER_EDIT_CLASSNAME = 'header-edit';
