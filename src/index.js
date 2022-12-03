@@ -611,9 +611,13 @@ function deleteProject() {
         Storage.storeUserAllProjectsToHisLocalStorage(allProjects);
         Storage.storeAllTasksNodesContainersContainerToLocalStorage(projectsTasksNodesContainersContainer);
         clearProjectsFromDisplay()
+        changeActiveProjectNodeTo(homeProject);
+        activeProjectIndexFromAllProjects = 0;
         displayAllProjects();
+        updateActiveProjectTitle();
+        updateTitleOfHeader();
         clearTableTasksContainer();
-        activeProjectIndexFromAllProjects = getActiveProjectIndexFromAllProjects(homeProjectToStore);
+        activeProjectTasks = projectsTasksNodesContainersContainer[activeProjectIndexFromAllProjects];
         displayActiveProjectTasks();
     }
 
@@ -627,9 +631,7 @@ function deleteProjectTasksNodeContainerOfIndexFromContainer(tasksNodesContainer
     container.splice(tasksNodesContainerIndex, 1);
 }
 
-/*
 const mainTaskHeader = document.querySelector('.main-tasks-header');
 mainTaskHeader.addEventListener('click', deleteProject);
-*/
 
 

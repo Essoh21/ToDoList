@@ -320,6 +320,7 @@ body {
     color: var(--header-background-color);
     background-color: var(--left-container-backgroud);
     padding: .3rem;
+    cursor: pointer;
 }
 
 .humburger-menu {

@@ -182,6 +182,7 @@ Html.addSrcToImgNode(Icons.humbergerMenuIcon, humburgerMenuContainer);
 
 const tasksContainerHeader = Html.createNewDivWithClassName(TASKS_BODY_CONTAINER_HEADER_CLASSNAME);
 Html.useTextAsInnerHtmlOfNode('Project Title', tasksContainerHeader);
+tasksContainerHeader.title = 'click to delete the project';
 // +++++tasks table
 
 const tasksTable = Html.createNewDivWithClassName(TASKS_TABLE_CLASSNAME);
