@@ -632,6 +632,11 @@ function deleteProjectTasksNodeContainerOfIndexFromContainer(tasksNodesContainer
 }
 
 const mainTaskHeader = document.querySelector('.main-tasks-header');
-mainTaskHeader.addEventListener('click', deleteProject);
+mainTaskHeader.addEventListener('click', () => {
+    if (!(activeProjectIndexFromAllProjects == 0)) {
+        deleteProject();
+    }
+
+});
 
 
